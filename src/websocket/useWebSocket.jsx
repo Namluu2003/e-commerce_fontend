@@ -1,3 +1,4 @@
+import { baseUrl } from "../helpers/Helpers.js";
 import { useEffect, useState } from "react";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
@@ -8,7 +9,7 @@ const useWebSocket = () => {
     const [stompClient, setStompClient] = useState(null);
 
     useEffect(() => {
-        const socket = new SockJS("http://localhost:8080/ws"); // Kết nối WebSocket server
+        const socket = new SockJS(`${baseUrl}/ws`); // Kết nối WebSocket server
         const client = new Client({
             webSocketFactory: () => socket,
             reconnectDelay: 5000, // Tự động reconnect sau 5s nếu mất kết nối

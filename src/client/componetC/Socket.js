@@ -1,3 +1,4 @@
+import { wsBaseUrl } from "../../helpers/Helpers.js";
 import { useRef, useCallback } from "react";
 import { Client } from "@stomp/stompjs";
 
@@ -18,7 +19,7 @@ export const useWebSocket = (sub, onMessageReceived) => {
       return;
     }
 
-    const socket = new WebSocket("ws://localhost:8080/ws");
+    const socket = new WebSocket(`${wsBaseUrl}/ws`);
     stompClient.current = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000, // Thử kết nối lại sau 5 giây nếu mất kết nối

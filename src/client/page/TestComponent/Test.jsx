@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import { Spin } from 'antd';
 import React, { useState, useEffect } from 'react';
 import Product from '../products/Product';
@@ -19,7 +20,7 @@ function ProductList() {
     //   }
 
   //     try {
-  //       const response = await fetch('http://localhost:8080/api/brand', {
+  //       const response = await fetch(`${baseUrl}/api/brand`, {
   //         method: 'GET',
   //         headers: {
   //           'Content-Type': 'application/json', // Chỉ định Content-Type là JSON

@@ -1,10 +1,11 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import { message } from "antd";
 import axios from "axios";
 
 const token = localStorage.getItem("token");
 
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/",
+  baseURL: `${baseUrl}/api/`,
   headers: {
     Authorization: `Bearer ${token}`,
   },

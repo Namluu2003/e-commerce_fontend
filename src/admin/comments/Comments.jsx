@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import { useState, useEffect } from "react";
 import {
   Table, Tag, Button, Space, Select, DatePicker, Input, Modal, Form, Row, Col, Checkbox, Collapse, Pagination, Card,
@@ -82,7 +83,7 @@ const Comments = () => {
   const fetchProductNames = async (keyword = "") => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/admin/comments/productName?keyword=${encodeURIComponent(keyword)}`
+        `${baseUrl}/api/admin/comments/productName?keyword=${encodeURIComponent(keyword)}`
       );
       const result = await response.json();
       if (Array.isArray(result.data)) {

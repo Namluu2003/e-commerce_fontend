@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card, Button, DatePicker, Tooltip, message } from "antd";
 import { FileExcelOutlined } from "@ant-design/icons";
@@ -71,7 +72,7 @@ const RevenueCards = ({ showCustomCard, customData }) => {
     useEffect(() => {
         const fetchData = async (type) => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/admin/statistical/${type}`);
+                const response = await axios.get(`${baseUrl}/api/admin/statistical/${type}`);
                 setData(prevState => ({
                     ...prevState,
                     [type.toLowerCase()]: response.data.data?.[0] || {
@@ -215,7 +216,7 @@ const DateFilter = ({ onSetCustomData, customData }) => {
             setDateRange({ startDate, endDate }); // Lưu khoảng thời gian đã chọn
 
             try {
-                const response = await axios.get(`http://localhost:8080/api/admin/statistical/CustomDate?startDate=${startDate}&endDate=${endDate}`);
+                const response = await axios.get(`${baseUrl}/api/admin/statistical/CustomDate?startDate=${startDate}&endDate=${endDate}`);
                 onSetCustomData(response.data.data?.[0] || null);
             } catch (error) {
                 console.error("Lỗi khi lấy dữ liệu tùy chỉnh từ API:", error);
@@ -224,7 +225,7 @@ const DateFilter = ({ onSetCustomData, customData }) => {
     };
     const sendDailyReportEmail = async () => {
         try {
-            await axios.post(`http://localhost:8080/api/admin/statistical/send-daily-report-email`);
+            await axios.post(`${baseUrl}/api/admin/statistical/send-daily-report-email`);
             toast.success('Báo cáo doanh thu ngày đã được gửi thành công qua email!');
         } catch (error) {
             console.error("Lỗi khi gửi email báo cáo:", error);

@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import React, { useEffect, useState, useRef } from 'react';
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
@@ -14,7 +15,7 @@ const Chat = () => {
   useEffect(() => {
     if (!roomId || !sender) return;
 
-    const socket = new SockJS('http://localhost:8080/ws');
+    const socket = new SockJS(`${baseUrl}/ws`);
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,

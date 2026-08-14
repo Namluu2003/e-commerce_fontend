@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import {
     Table, Input, Button, Row, Col, Typography, Card, Checkbox, message
 } from "antd";
@@ -24,7 +25,7 @@ const AddPromotion = () => {
     const fetchProductsData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get("http://localhost:8080/api/admin/product/hien");
+            const response = await axios.get(`${baseUrl}/api/admin/product/hien`);
 
             // Lọc dữ liệu: chỉ lấy sản phẩm có totalQuantity > 0
             const filteredProducts = response.data.data.filter(product => product.totalQuantity > 0);
@@ -52,11 +53,11 @@ const AddPromotion = () => {
             // Kiểm tra nếu productName là số thì gọi API minQuantity, ngược lại gọi API productname
             if (!isNaN(productName)) {
                 response = await axios.get(
-                    `http://localhost:8080/api/admin/product/searchQuantityProduct/${productName}`
+                    `${baseUrl}/api/admin/product/searchQuantityProduct/${productName}`
                 );
             } else {
                 response = await axios.get(
-                    `http://localhost:8080/api/admin/product/searchNameProduct/${productName}`
+                    `${baseUrl}/api/admin/product/searchNameProduct/${productName}`
                 );
             }
 
@@ -99,7 +100,7 @@ const AddPromotion = () => {
     const fetchProductDetails = async (id) => {
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:8080/api/admin/product/detail/${id}`);
+            const response = await axios.get(`${baseUrl}/api/admin/product/detail/${id}`);
             setProductDetails(response.data.data || []);
         } catch (error) {
             message.error("Không thể tải chi tiết sản phẩm.");
@@ -112,7 +113,7 @@ const AddPromotion = () => {
     const handleCheckboxChange = async (e, record) => {
         if (e.target.checked) {
             try {
-                const response = await axios.get(`http://localhost:8080/api/admin/productdetail/product/${record.id}`);
+                const response = await axios.get(`${baseUrl}/api/admin/productdetail/product/${record.id}`);
 
                 if (response.data?.data) {
                     setProductDetails(response.data.data); // ✅ Cập nhật danh sách chi tiết

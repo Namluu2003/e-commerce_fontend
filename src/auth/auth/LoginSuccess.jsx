@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import { message } from "antd";
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom"; 
@@ -11,7 +12,7 @@ const LoginSuccess = () => {
     const fetchUserProfile = async (token) => {
       try {
   
-        const response = await axios.get("http://localhost:8080/api/v1/auth/profile", {
+        const response = await axios.get(`${baseUrl}/api/v1/auth/profile`, {
           headers: {
             Authorization: `Bearer ${token}`, 
           },

@@ -3,7 +3,7 @@ import {InputNumber, Table, Input, DatePicker, Select, Card, Form, Spin, Alert, 
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import { baseUrl } from '../../helpers/Helpers.js';
+import { baseUrl } from "../../helpers/Helpers.js";
 import dayjs from "dayjs";
 import { useWatch } from 'antd/es/form/Form';
 import {toast} from "react-toastify";
@@ -150,7 +150,7 @@ const UpdateVoucher = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.get("http://localhost:8080/api/admin/customers/");
+            const response = await axios.get(`${baseUrl}/api/admin/customers/`);
             const customerData = response.data.map(c => ({ ...c, key: c.id }));
 
             setCustomers(customerData);

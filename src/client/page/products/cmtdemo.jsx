@@ -1,3 +1,4 @@
+import { baseUrl, wsBaseUrl } from "../../../helpers/Helpers.js";
 import React, { useEffect, useState, useRef } from "react";
 import { Client } from "@stomp/stompjs";
 import {
@@ -44,7 +45,7 @@ const CommentSection = ({ id }) => {
   // Fetch comments from the server
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/comments/${productId}`);
+      const response = await fetch(`${baseUrl}/comments/${productId}`);
       if (!response.ok) throw new Error("Failed to fetch comments");
       const data = await response.json();
       setComments(data);
@@ -59,7 +60,7 @@ const CommentSection = ({ id }) => {
 
   // Setup WebSocket connection for real-time updates
   const connectWebSocket = () => {
-    const socket = new WebSocket("ws://localhost:8080/ws");
+    const socket = new WebSocket(`${wsBaseUrl}/ws`);
     stompClient.current = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,

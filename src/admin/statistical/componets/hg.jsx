@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import React, { useState, useEffect, PureComponent } from "react";
 import { Card, Button, Table, Row, Col, DatePicker } from "antd";
 import { PieChart, Pie, Cell, Tooltip, Legend, RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
@@ -15,19 +16,19 @@ const ChartStatusBill = () => {
 
   useEffect(() => {
     const apiUrls = {
-      day: "http://localhost:8080/api/admin/statistical/bestday",
-      week: "http://localhost:8080/api/admin/statistical/bestweek",
-      month: "http://localhost:8080/api/admin/statistical/bestmonth",
-      year: "http://localhost:8080/api/admin/statistical/bestyear",
-      custom: "http://localhost:8080/api/admin/statistical/best-custom",
+      day: `${baseUrl}/api/admin/statistical/bestday`,
+      week: `${baseUrl}/api/admin/statistical/bestweek`,
+      month: `${baseUrl}/api/admin/statistical/bestmonth`,
+      year: `${baseUrl}/api/admin/statistical/bestyear`,
+      custom: `${baseUrl}/api/admin/statistical/best-custom`,
     };
 
     const chartApiUrls = {
-      day: "http://localhost:8080/api/admin/statistical/chartDay",
-      week: "http://localhost:8080/api/admin/statistical/chartWeek",
-      month: "http://localhost:8080/api/admin/statistical/chartMonth",
-      year: "http://localhost:8080/api/admin/statistical/chartYear",
-      custom: "http://localhost:8080/api/admin/statistical/chartCustom",
+      day: `${baseUrl}/api/admin/statistical/chartDay`,
+      week: `${baseUrl}/api/admin/statistical/chartWeek`,
+      month: `${baseUrl}/api/admin/statistical/chartMonth`,
+      year: `${baseUrl}/api/admin/statistical/chartYear`,
+      custom: `${baseUrl}/api/admin/statistical/chartCustom`,
     };
 
     const fetchTableData = async () => {
@@ -65,7 +66,7 @@ const ChartStatusBill = () => {
 
     const fetchChartData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/admin/statistical/chartYear"); // Thay đổi URL nếu cần
+        const response = await axios.get(`${baseUrl}/api/admin/statistical/chartYear`); // Thay đổi URL nếu cần
     
         if (response.data && Array.isArray(response.data.data)) {
           const formattedChartData = response.data.data.map((item) => ({

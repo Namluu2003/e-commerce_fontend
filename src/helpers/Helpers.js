@@ -10,6 +10,7 @@ export const validateEmail = (email) => {
 };
 
 export const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8080";
+export const wsBaseUrl = baseUrl.replace(/^http/, "ws");
 
 export function convertDate(isoString) {
   const date = new Date(isoString);

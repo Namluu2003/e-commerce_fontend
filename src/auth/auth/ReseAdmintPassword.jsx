@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import {useEffect} from 'react';
 import { Form, Input, Button, message } from "antd";
 import {useSearchParams, useNavigate, useParams} from "react-router-dom";
@@ -19,7 +20,7 @@ const ResetAdminPassword = () => {
     const onFinish = async (values) => {
         try {
             const response = await axios.post(
-                "http://localhost:8080/api/authentication/reset-admin-password",
+                `${baseUrl}/api/authentication/reset-admin-password`,
                 {
                     token: token,
                     password: values.password.trim()

@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import React, {useState} from "react";
 import {motion} from "framer-motion";
 import {Link, useNavigate} from "react-router-dom";
@@ -27,7 +28,7 @@ const LoginAdmin = () => {
 
         try {
             const response = await axios.post(
-                "http://localhost:8080/api/authentication/login-admin",
+                `${baseUrl}/api/authentication/login-admin`,
                 {
                     email: formData.email.trim(),
                     password: formData.password.trim(),
@@ -63,7 +64,7 @@ const LoginAdmin = () => {
         setResetLoading(true);
         try {
             const response =
-                await axios.post(`http://localhost:8080/api/authentication/forgot-admin-password/${resetEmail.trim()}`);
+                await axios.post(`${baseUrl}/api/authentication/forgot-admin-password/${resetEmail.trim()}`);
             toast.success("Đã gửi email đặt lại mật khẩu!");
             setIsModalVisible(false);
             setResetEmail("");

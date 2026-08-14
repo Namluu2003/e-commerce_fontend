@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import {
   Modal,
   Row,
@@ -72,7 +73,7 @@ const ModalEditSanPham = ({
 
     try {
       const deleteRequests = imageIds.map((id) =>
-        fetch("http://localhost:8080/cloudinary/delete", {
+        fetch(`${baseUrl}/cloudinary/delete`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ public_id: id }),
@@ -100,7 +101,7 @@ const ModalEditSanPham = ({
 
     try {
       const deleteRequests = imageIds.map((id) =>
-        fetch("http://localhost:8080/cloudinary/deleteandupdatedb", {
+        fetch(`${baseUrl}/cloudinary/deleteandupdatedb`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -186,7 +187,7 @@ const ModalEditSanPham = ({
 
     if (file.publicId || file.public_id) {
       // try {
-      //   const res = await fetch("http://localhost:8080/cloudinary/delete", {
+      //   const res = await fetch(`${baseUrl}/cloudinary/delete`, {
       //     method: "POST",
       //     headers: { "Content-Type": "application/json" },
       //     body: JSON.stringify({ public_id: file.publicId || file.public_id }),

@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import React, { useState } from 'react';
 import { Form, Input, Button, message, Spin } from 'antd';
 import { MailOutlined, LoadingOutlined } from '@ant-design/icons';
@@ -13,7 +14,7 @@ const ForgotPasswordAdmin = () => {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/auth/forgot-password?email=${encodeURIComponent(values.email)}`);
+      const response = await axios.get(`${baseUrl}/api/v1/auth/forgot-password?email=${encodeURIComponent(values.email)}`);
       
       console.log('Password reset request response:', response.data);
       message.success('Password reset link sent to your email!');

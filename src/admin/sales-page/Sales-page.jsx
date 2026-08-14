@@ -14,7 +14,7 @@ import CustomerSelect from "./component/CustomerSelect.jsx";
 import axios from "axios";
 import moment from "moment/moment.js";
 import SalePaymentInfo from "./component/SalePaymentInfo.jsx";
-import {baseUrl, calculateShippingFee, formatVND, generateAddressString} from "../../helpers/Helpers.js";
+import { baseUrl, calculateShippingFee, formatVND, generateAddressString } from "../../helpers/Helpers.js";
 import {postChangeQuantityProduct} from "./billService.js";
 import axiosInstance from "../../utils/axiosInstance.js";
 import ProductDetailModal from "./component/ProductDetailModal.jsx";
@@ -1013,7 +1013,7 @@ const [showApp,setShowApp]= useState(false)
                 return;
             }
             // Lấy dữ liệu PDF từ API với responseType là 'blob'
-            const response = await axios.get(`http://localhost:8080/api/admin/bill/print-bill/${id}`, {
+            const response = await axios.get(`${baseUrl}/api/admin/bill/print-bill/${id}`, {
                 responseType: 'blob'
             });
 

@@ -1,3 +1,4 @@
+import { baseUrl } from "../helpers/Helpers.js";
 import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import {Form, Input, Select, DatePicker, Button, Upload, message, Row, Col, Card, Radio, Modal, Spin} from 'antd';
@@ -100,7 +101,7 @@ const AddCustomer = ({
 
         try {
             const deleteRequests = publicIds.map((id) =>
-                fetch("http://localhost:8080/cloudinary/delete", {
+                fetch(`${baseUrl}/cloudinary/delete`, {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify({public_id: id}),
@@ -129,7 +130,7 @@ const AddCustomer = ({
     const handleRemove = async (file) => {
         if (file.response?.public_id) {
             try {
-                await fetch("http://localhost:8080/cloudinary/delete", {
+                await fetch(`${baseUrl}/cloudinary/delete`, {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify({public_id: file.response.public_id}),
@@ -199,7 +200,7 @@ const AddCustomer = ({
         }
 
         try {
-            const response = await axios.get(`http://localhost:8080/api/admin/customers/check-email?email=${encodeURIComponent(value)}`);
+            const response = await axios.get(`${baseUrl}/api/admin/customers/check-email?email=${encodeURIComponent(value)}`);
             if (response.data && response.data.exists) {
                 toast.error('Email này đã được sử dụng!');
                 return false;
@@ -221,7 +222,7 @@ const AddCustomer = ({
         }
 
         try {
-            const response = await axios.get(`http://localhost:8080/api/admin/customers/check-phone?phoneNumber=${encodeURIComponent(phoneNumber)}`);
+            const response = await axios.get(`${baseUrl}/api/admin/customers/check-phone?phoneNumber=${encodeURIComponent(phoneNumber)}`);
             if (response.data && response.data.exists) {
                 toast.error('Số điện thoại này đã được sử dụng.');
                 return false;
@@ -264,7 +265,7 @@ const AddCustomer = ({
                 specificAddress: address.specificAddress,
             };
 
-            await axios.post('http://localhost:8080/api/admin/customers/add', newData);
+            await axios.post(`${baseUrl}/api/admin/customers/add`, newData);
             toast.success("Thêm khách hàng thành công! Mật khẩu tạm thời đã được gửi đến email của khách hàng.");
             form.resetFields();
             setFileList([]);

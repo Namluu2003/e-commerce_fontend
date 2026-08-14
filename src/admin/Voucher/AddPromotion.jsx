@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import {
     Modal, Table, Input, Button, Row, Col, Typography, Card, Checkbox, message, InputNumber, Form, DatePicker, Select, Collapse, Space, Tooltip, Spin
 } from "antd";
@@ -176,7 +177,7 @@ const AddPromotion = () => {
             if (selectedProducts.length > 0) {
                 const allDetails = [];
                 for (const product of selectedProducts) {
-                    const response = await axios.get(`http://localhost:8080/api/admin/productdetail/product/${product.id}`);
+                    const response = await axios.get(`${baseUrl}/api/admin/productdetail/product/${product.id}`);
                     if (response.data?.data) {
                         allDetails.push(...response.data.data);
                     }
@@ -279,7 +280,7 @@ const AddPromotion = () => {
             // ✅ In ra console để kiểm tra dữ liệu trước khi gửi
             console.log("Dữ liệu gửi lên backend:", requestData);
 
-            const response = await axios.post("http://localhost:8080/api/admin/promotion/add", requestData);
+            const response = await axios.post(`${baseUrl}/api/admin/promotion/add`, requestData);
 
             // ✅ In ra phản hồi từ backend để kiểm tra
             console.log("Phản hồi từ backend:", response.data.data);
@@ -326,7 +327,7 @@ const AddPromotion = () => {
     const fetchProductsData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get("http://localhost:8080/api/admin/product/hien");
+            const response = await axios.get(`${baseUrl}/api/admin/product/hien`);
 
             // Lọc dữ liệu: chỉ lấy sản phẩm có totalQuantity > 0
             const filteredProducts = response.data.data.filter(product => product.totalQuantity > 0);
@@ -353,11 +354,11 @@ const AddPromotion = () => {
             // Kiểm tra nếu productName là số thì gọi API minQuantity, ngược lại gọi API productname
             if (!isNaN(productName)) {
                 response = await axios.get(
-                    `http://localhost:8080/api/admin/product/searchQuantityProduct/${productName}`
+                    `${baseUrl}/api/admin/product/searchQuantityProduct/${productName}`
                 );
             } else {
                 response = await axios.get(
-                    `http://localhost:8080/api/admin/product/searchNameProduct/${productName}`
+                    `${baseUrl}/api/admin/product/searchNameProduct/${productName}`
                 );
             }
 
@@ -408,7 +409,7 @@ const AddPromotion = () => {
     const handleCheckboxChange = async (e, record) => {
         if (e.target.checked) {
             try {
-                const response = await axios.get(`http://localhost:8080/api/admin/productdetail/product/${record.id}`);
+                const response = await axios.get(`${baseUrl}/api/admin/productdetail/product/${record.id}`);
         
                 if (response.data?.data) {
                     const newDetails = response.data.data.filter(
@@ -434,7 +435,7 @@ const AddPromotion = () => {
                 try {
                     const allDetails = [];
                     for (const product of updatedSelectedProducts) {
-                        const response = await axios.get(`http://localhost:8080/api/admin/productdetail/product/${product.id}`);
+                        const response = await axios.get(`${baseUrl}/api/admin/productdetail/product/${product.id}`);
                         if (response.data?.data) {
                             allDetails.push(...response.data.data);
                         }
@@ -472,7 +473,7 @@ const AddPromotion = () => {
                             setProductDetails([]); // Reset chi tiết sản phẩm
                             products.forEach(async (record) => {
                                 try {
-                                    const response = await axios.get(`http://localhost:8080/api/admin/productdetail/product/${record.id}`);
+                                    const response = await axios.get(`${baseUrl}/api/admin/productdetail/product/${record.id}`);
                                     if (response.data?.data) {
                                         setProductDetails(prev => [...prev, ...response.data.data]);
                                     }

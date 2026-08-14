@@ -1,3 +1,4 @@
+import { baseUrl } from "../helpers/Helpers.js";
 
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -52,7 +53,7 @@ const UpdateCustomer = () => {
         try {
             await Promise.all(
                 imageIds.map(id =>
-                    axios.post('http://localhost:8080/cloudinary/delete', { public_id: id })
+                    axios.post(`${baseUrl}/cloudinary/delete`, { public_id: id })
                 )
             );
         } catch (error) {
@@ -104,7 +105,7 @@ const UpdateCustomer = () => {
     // Handle image removal
     const handleRemove = async (file) => {
         try {
-            await axios.post('http://localhost:8080/cloudinary/delete', {
+            await axios.post(`${baseUrl}/cloudinary/delete`, {
                 public_id: file.uid
             });
             setCleanUpImage(prev => prev.filter(id => id !== file.uid));
@@ -128,7 +129,7 @@ const UpdateCustomer = () => {
     
     const fetchCustomer = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/admin/customers/detail/${id}`);
+            const response = await axios.get(`${baseUrl}/api/admin/customers/detail/${id}`);
             const customer = response.data;
             setSelectedRecord(customer);
 
@@ -208,7 +209,7 @@ const UpdateCustomer = () => {
             };
 
             // Update customer info
-            await axios.put(`http://localhost:8080/api/admin/customers/update/${id}`, customerData);
+            await axios.put(`${baseUrl}/api/admin/customers/update/${id}`, customerData);
 
             // Handle address update - still updating address but without validation check
             const defaultAddress = selectedRecord.addresses?.find(addr => addr.isAddressDefault);
@@ -221,9 +222,9 @@ const UpdateCustomer = () => {
             };
 
             if (defaultAddress) {
-                await axios.put(`http://localhost:8080/api/admin/customers/update-address/${defaultAddress.id}`, addressData);
+                await axios.put(`${baseUrl}/api/admin/customers/update-address/${defaultAddress.id}`, addressData);
             } else {
-                await axios.post(`http://localhost:8080/api/admin/customers/add-address/${id}`, addressData);
+                await axios.post(`${baseUrl}/api/admin/customers/add-address/${id}`, addressData);
             }
 
             toast.success('Cập nhật khách hàng thành công!');

@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import { Badge, Col, Image, Row } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -15,7 +16,7 @@ function Nav() {
     if (user) {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/client/getallcartforcustomeridnopage`,
+          `${baseUrl}/api/client/getallcartforcustomeridnopage`,
           {
             params: { customerId: user.id }, // Truyền params đúng cách
           }

@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Card,
@@ -37,7 +38,7 @@ const Detail = () => {
       setLoading(true);
       // Thay thế URL này bằng API thật của bạn
       const response = await axios.get(
-        `http://localhost:8080/api/admin/productdetail/${id}`
+        `${baseUrl}/api/admin/productdetail/${id}`
       );
       setProduct(response.data.data); // Cập nhật state với dữ liệu từ API
       console.log(product);

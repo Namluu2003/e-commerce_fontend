@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Row,
@@ -204,7 +205,7 @@ const ProductDetailDrawer = () => {
     if (!imageIds || imageIds.length === 0) return;
     await Promise.all(
       imageIds.map((id) =>
-        fetch("http://localhost:8080/cloudinary/delete", {
+        fetch(`${baseUrl}/cloudinary/delete`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ public_id: id }),
@@ -247,7 +248,7 @@ const ProductDetailDrawer = () => {
 
   const handleRemove = async (file, color) => {
     if (file.response?.public_id) {
-      await fetch("http://localhost:8080/cloudinary/delete", {
+      await fetch(`${baseUrl}/cloudinary/delete`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ public_id: file.response.public_id }),

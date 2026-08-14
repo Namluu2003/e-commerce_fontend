@@ -1,3 +1,4 @@
+import { baseUrl, wsBaseUrl } from "../../../helpers/Helpers.js";
 import React, {useEffect, useRef, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PiBellRinging } from "react-icons/pi";
@@ -86,7 +87,7 @@ function HeaderNav() {
     if (user) {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/client/getallcartforcustomeridnopage`,
+          `${baseUrl}/api/client/getallcartforcustomeridnopage`,
           {
             params: { customerId: user.id },
           }
@@ -129,7 +130,7 @@ function HeaderNav() {
   const markAsRead = async (notificationId) => {
     try {
       await axios.get(
-        `http://localhost:8080/api/notifications/read/${notificationId}`
+        `${baseUrl}/api/notifications/read/${notificationId}`
       );
       setNotifications((prev) =>
         prev.map((noti) =>
@@ -145,7 +146,7 @@ function HeaderNav() {
   // WebSocket connection
 
   const connectWebSocket = () => {
-    const socket = new WebSocket("ws://localhost:8080/ws");
+    const socket = new WebSocket(`${wsBaseUrl}/ws`);
     
     const client = new Client({
       webSocketFactory: () => socket,

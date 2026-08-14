@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import {
     Modal, Table, Input, Button, Row, Col, Typography, Card, Checkbox, message, InputNumber, Form, DatePicker, Select
 } from "antd";
@@ -32,7 +33,7 @@ const DetailPromotion = () => {
 
         const fetchPromotionDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/admin/promotion/detail/${id}`);
+                const response = await axios.get(`${baseUrl}/api/admin/promotion/detail/${id}`);
                 const promoData = response.data.data;
 
                 if (promoData) {
@@ -45,7 +46,7 @@ const DetailPromotion = () => {
                     const selectedProductIds = promoData.productIds || [];
                     const selectedProductDetailIds = promoData.productDetailIds || [];
 
-                    const productResponse = await axios.get("http://localhost:8080/api/admin/product/hien");
+                    const productResponse = await axios.get(`${baseUrl}/api/admin/product/hien`);
                     const filteredProducts = productResponse.data.data.filter(product => product.totalQuantity > 0);
 
                     const selectedProductsData = filteredProducts.filter(product => selectedProductIds.includes(product.id));
@@ -53,7 +54,7 @@ const DetailPromotion = () => {
                     let allProductDetails = [];
                     for (let product of selectedProductsData) {
                         try {
-                            const detailResponse = await axios.get(`http://localhost:8080/api/admin/productdetail/product/${product.id}`);
+                            const detailResponse = await axios.get(`${baseUrl}/api/admin/productdetail/product/${product.id}`);
                             allProductDetails = [...allProductDetails, ...detailResponse.data.data];
                         } catch (error) {
                             console.error("Lỗi khi tải chi tiết sản phẩm:", error);
@@ -93,7 +94,7 @@ const DetailPromotion = () => {
             // ✅ In ra console để kiểm tra dữ liệu trước khi gửi
             console.log("Dữ liệu gửi lên backend:", requestData);
 
-            const response = await axios.put(`http://localhost:8080/api/admin/promotion/update/${id}`, requestData);
+            const response = await axios.put(`${baseUrl}/api/admin/promotion/update/${id}`, requestData);
 
             // ✅ In ra phản hồi từ backend để kiểm tra
             console.log("Phản hồi từ backend:", response.data.data);
@@ -131,7 +132,7 @@ const DetailPromotion = () => {
     const fetchProductsData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get("http://localhost:8080/api/admin/product/hien");
+            const response = await axios.get(`${baseUrl}/api/admin/product/hien`);
 
             // Lọc dữ liệu: chỉ lấy sản phẩm có totalQuantity > 0
             const filteredProducts = response.data.data.filter(product => product.totalQuantity > 0);
@@ -158,11 +159,11 @@ const DetailPromotion = () => {
             // Kiểm tra nếu productName là số thì gọi API minQuantity, ngược lại gọi API productname
             if (!isNaN(productName)) {
                 response = await axios.get(
-                    `http://localhost:8080/api/admin/product/searchQuantityProduct/${productName}`
+                    `${baseUrl}/api/admin/product/searchQuantityProduct/${productName}`
                 );
             } else {
                 response = await axios.get(
-                    `http://localhost:8080/api/admin/product/searchNameProduct/${productName}`
+                    `${baseUrl}/api/admin/product/searchNameProduct/${productName}`
                 );
             }
 
@@ -202,7 +203,7 @@ const DetailPromotion = () => {
     const handleCheckboxChange = async (e, record) => {
         if (e.target.checked) {
             try {
-                const response = await axios.get(`http://localhost:8080/api/admin/productdetail/product/${record.id}`);
+                const response = await axios.get(`${baseUrl}/api/admin/productdetail/product/${record.id}`);
 
                 if (response.data?.data) {
                     const newDetails = response.data.data.filter(detail =>
@@ -249,7 +250,7 @@ const DetailPromotion = () => {
 
                             products.forEach(async (record) => {
                                 try {
-                                    const response = await axios.get(`http://localhost:8080/api/admin/productdetail/product/${record.id}`);
+                                    const response = await axios.get(`${baseUrl}/api/admin/productdetail/product/${record.id}`);
                                     if (response.data?.data) {
                                         setProductDetails(prev => [...prev, ...response.data.data]);
                                     }

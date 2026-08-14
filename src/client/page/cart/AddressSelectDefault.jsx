@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import { Button, Flex, Modal, Space } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -50,7 +51,7 @@ function AddressSelectDefault({
     try {
       // 🟡 Gọi API lấy thông tin khách hàng
       const response = await axios.get(
-        `http://localhost:8080/api/admin/customers/detail/${id}`
+        `${baseUrl}/api/admin/customers/detail/${id}`
       );
       const customerData = response.data;
       const processedAddresses = await Promise.all(
@@ -124,7 +125,7 @@ function AddressSelectDefault({
 
     axios
       .put(
-        `http://localhost:8080/api/admin/customers/set-default-address/${addressId}`
+        `${baseUrl}/api/admin/customers/set-default-address/${addressId}`
       )
       .then(() => {
         toast.success("Chọn địa chỉ thành công!");

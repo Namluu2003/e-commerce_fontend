@@ -1,3 +1,4 @@
+import { baseUrl, wsBaseUrl } from "../../../helpers/Helpers.js";
 import React, { useState, useEffect, useRef } from "react";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
@@ -50,7 +51,7 @@ const ChatWidget = ({ customerId, staffId, senderType, anou }) => {
     try {
       if (senderType === "STAFF") {
         const response = await axios.get(
-          `http://localhost:8080/api/conversations/staff/${staffId}`
+          `${baseUrl}/api/conversations/staff/${staffId}`
         );
         const convs = response.data;
         setConversations(convs);
@@ -61,7 +62,7 @@ const ChatWidget = ({ customerId, staffId, senderType, anou }) => {
         let total = 0;
         for (const conv of convs) {
           const msgResponse = await axios.get(
-            `http://localhost:8080/api/messages/${conv.id}`
+            `${baseUrl}/api/messages/${conv.id}`
           );
           const sentCount = msgResponse.data.filter(
             (msg) => msg.status === "SENT" && msg.senderType !== senderType
@@ -74,7 +75,7 @@ const ChatWidget = ({ customerId, staffId, senderType, anou }) => {
         console.log("Danh sách cuộc trò chuyện của staff:", convs);
       } else {
         const response = await axios.get(
-          "http://localhost:8080/api/conversations/staff"
+          `${baseUrl}/api/conversations/staff`
         );
         const staff = response.data;
         setStaffList(staff);
@@ -83,12 +84,12 @@ const ChatWidget = ({ customerId, staffId, senderType, anou }) => {
         let total = 0;
         for (const s of staff) {
           const convResponse = await axios.post(
-            "http://localhost:8080/api/conversations",
+            `${baseUrl}/api/conversations`,
             { customerId, staffId: s.id }
           );
           const convId = convResponse.data.id;
           const msgResponse = await axios.get(
-            `http://localhost:8080/api/messages/${convId}`
+            `${baseUrl}/api/messages/${convId}`
           );
           const sentCount = msgResponse.data.filter(
             (msg) => msg.status === "SENT" && msg.senderType !== senderType
@@ -114,7 +115,7 @@ const ChatWidget = ({ customerId, staffId, senderType, anou }) => {
     }
     // Lấy lịch sử tin nhắn
     axios
-      .get(`http://localhost:8080/api/messages/${conversationId}`)
+      .get(`${baseUrl}/api/messages/${conversationId}`)
       .then((response) => {
         setMessages(response.data);
       })
@@ -145,7 +146,7 @@ const ChatWidget = ({ customerId, staffId, senderType, anou }) => {
   }, [messages]);
   // connec
   const connectWS = () => {
-    const socket = new WebSocket("ws://localhost:8080/ws");
+    const socket = new WebSocket(`${wsBaseUrl}/ws`);
     stompClient.current = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
@@ -219,7 +220,7 @@ const ChatWidget = ({ customerId, staffId, senderType, anou }) => {
         setConversationId(id);
       } else {
         const response = await axios.post(
-          "http://localhost:8080/api/conversations",
+          `${baseUrl}/api/conversations`,
           {
             customerId,
             staffId: id,

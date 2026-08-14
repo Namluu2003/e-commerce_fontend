@@ -1,3 +1,4 @@
+import { wsBaseUrl } from "../../../helpers/Helpers.js";
 import {
   Table,
   Input,
@@ -158,7 +159,7 @@ const ProductDetailModal = ({
 
   const setupWebSocket = () => {
     const stompClient = new Client({
-      brokerURL: "ws://localhost:8080/ws",
+      brokerURL: `${wsBaseUrl}/ws`,
       connectHeaders: { login: "guest", passcode: "guest" },
       reconnectDelay: 5000
     });

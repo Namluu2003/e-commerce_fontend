@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -29,7 +30,7 @@ const Staff = () => {
     }, []);
 
     const fetchData = () => {
-        axios.get('http://localhost:8080/api/admin/staff/hienthi')
+        axios.get(`${baseUrl}/api/admin/staff/hienthi`)
             .then((response) => {
                 const fetchedData = response.data.map((item, index) => ({
                     key: index + 1,
@@ -53,7 +54,7 @@ const Staff = () => {
     };
 
     const handleSearch = () => {
-        axios.get('http://localhost:8080/api/admin/staff/filterr', {
+        axios.get('${baseUrl}/api/admin/staff/filterr', {
             params: {
                 searchText: searchText,
                 status: status,
@@ -98,7 +99,7 @@ const Staff = () => {
             okType: 'danger',
             cancelText: 'Hủy',
             onOk() {
-                axios.delete(`http://localhost:8080/api/admin/staff/delete/${record.id}`)
+                axios.delete(`${baseUrl}/api/admin/staff/delete/${record.id}`)
                     .then(() => {
                         toast.success('Xóa nhân viên thành công!');
                         fetchData();

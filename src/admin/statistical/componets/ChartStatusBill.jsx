@@ -4,7 +4,7 @@ import { RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, PieChart
 import { FileExcelOutlined } from "@ant-design/icons";
 import axios from "axios";
 import ProductOrderChart from "./ProductOrderChart.jsx";
-// import {convertBillStatusToString} from '../../helpers/Helpers.js';
+// import { convertBillStatusToString, baseUrl } from "../../helpers/Helpers.js";
 
 const { RangePicker } = DatePicker;
 
@@ -19,19 +19,19 @@ const ChartStatusBill = () => {
   const [currentPage, setCurrentPage] = useState(1); // State lưu trang hiện tại
   
   const apiUrls = {
-    day: "http://localhost:8080/api/admin/statistical/bestday",
-    week: "http://localhost:8080/api/admin/statistical/bestweek",
-    month: "http://localhost:8080/api/admin/statistical/bestmonth",
-    year: "http://localhost:8080/api/admin/statistical/bestyear",
-    custom: "http://localhost:8080/api/admin/statistical/best-custom",
+    day: `${baseUrl}/api/admin/statistical/bestday`,
+    week: `${baseUrl}/api/admin/statistical/bestweek`,
+    month: `${baseUrl}/api/admin/statistical/bestmonth`,
+    year: `${baseUrl}/api/admin/statistical/bestyear`,
+    custom: `${baseUrl}/api/admin/statistical/best-custom`,
   };
 
   const chartApiUrls = {
-    day: "http://localhost:8080/api/admin/statistical/chartDay",
-    week: "http://localhost:8080/api/admin/statistical/chartWeek",
-    month: "http://localhost:8080/api/admin/statistical/chartMonth",
-    year: "http://localhost:8080/api/admin/statistical/chartYear",
-    custom: "http://localhost:8080/api/admin/statistical/chartCustom",
+    day: `${baseUrl}/api/admin/statistical/chartDay`,
+    week: `${baseUrl}/api/admin/statistical/chartWeek`,
+    month: `${baseUrl}/api/admin/statistical/chartMonth`,
+    year: `${baseUrl}/api/admin/statistical/chartYear`,
+    custom: `${baseUrl}/api/admin/statistical/chartCustom`,
   }
 
   useEffect(() => {

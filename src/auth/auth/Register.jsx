@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import styles from "./Register.module.css";
-import { validateEmail } from "../../helpers/Helpers.js";
+import { validateEmail, baseUrl } from "../../helpers/Helpers.js";
 import { COLORS } from "../../constants/constants.js";
 import {toast} from "react-toastify";
 import log from "eslint-plugin-react/lib/util/log.js";
@@ -107,7 +107,7 @@ const Register = () => {
         
         try {
             const response = await axios.post(
-                "http://localhost:8080/api/authentication/register",
+                `${baseUrl}/api/authentication/register`,
                 {
                     fullName: formData.fullName.trim(),
                     email: formData.email.trim(),
@@ -145,7 +145,7 @@ const Register = () => {
             const googleToken = credential;
 
             // Send Google token to backend for validation
-            const res = await axios.post(`http://localhost:8080/api/authentication/google-login/${googleToken}`)
+            const res = await axios.post(`${baseUrl}/api/authentication/google-login/${googleToken}`)
 
             if (res.status === 200) {
                 // Save user data to localStorage or handle further logic here

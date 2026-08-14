@@ -22,7 +22,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { color } from 'framer-motion';
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import { baseUrl, convertStatusVoucher, ConvertvoucherType, ConvertdiscountType } from '../../helpers/Helpers.js';
+import { baseUrl, convertStatusVoucher, ConvertvoucherType, ConvertdiscountType } from "../../helpers/Helpers.js";
 import dayjs from 'dayjs';
 import { useWatch } from 'antd/es/form/Form';
 import {toast} from "react-toastify";
@@ -302,7 +302,7 @@ const AddVoucher = () => {
 
             console.log("Dữ liệu gửi lên API:", requestData);
 
-            await axios.post("http://localhost:8080/api/admin/voucher/add", requestData);
+            await axios.post(`${baseUrl}/api/admin/voucher/add`, requestData);
             toast.success("Thêm mới phiếu giảm giá thành công!");
 
             form.resetFields();

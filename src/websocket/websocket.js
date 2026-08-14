@@ -1,7 +1,8 @@
+import { baseUrl } from "../helpers/Helpers.js";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 
-const SOCKET_URL = "http://localhost:8080/ws"; // Đổi thành URL WebSocket của backend
+const SOCKET_URL = `${baseUrl}/ws`; // Đổi thành URL WebSocket của backend
 
 const stompClient = new Client({
     webSocketFactory: () => new SockJS(SOCKET_URL),

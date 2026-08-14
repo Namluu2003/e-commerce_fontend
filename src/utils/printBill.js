@@ -1,9 +1,10 @@
+import { baseUrl } from "../helpers/Helpers.js";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 export const handleGetBlobUrlPrintBill = async (id) => {
     try {
-        const response = await axios.get(`http://localhost:8080/api/admin/bill/print-bill/${id}`, {
+        const response = await axios.get(`${baseUrl}/api/admin/bill/print-bill/${id}`, {
             responseType: 'blob'
         });
         const blob = new Blob([response.data], { type: 'application/pdf' });

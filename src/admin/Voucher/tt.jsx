@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Space, Table, Input, DatePicker, Select, Card, Button, Modal, Form, message, Col, Row, theme, Tag, Radio, Spin, List, Switch, Tooltip, InputNumber } from 'antd';
 import axios from 'axios';
-import { baseUrl, convertStatusVoucher, ConvertvoucherType, ConvertdiscountType } from '../../helpers/Helpers.js';
+import { baseUrl, convertStatusVoucher, ConvertvoucherType, ConvertdiscountType } from "../../helpers/Helpers.js";
 
 import "./StatusSelector.css";
 import { EyeOutlined, SearchOutlined, EditOutlined, DeleteOutlined, RedoOutlined, PlusOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
@@ -256,7 +256,7 @@ const VoucherList = () => {
         console.log("toi ham nay");
 
         try {
-            const response = await axios.get("http://localhost:8080/api/admin/voucher/switchStatus", {
+            const response = await axios.get(`${baseUrl}/api/admin/voucher/switchStatus`, {
                 params: { id, status }
             });
             console.log(response);

@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Drawer,
@@ -149,7 +150,7 @@ const ProductDetailDrawer = () => {
 
     try {
       const deleteRequests = imageIds.map((id) =>
-        fetch("http://localhost:8080/cloudinary/delete", {
+        fetch(`${baseUrl}/cloudinary/delete`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ public_id: id }),
@@ -235,7 +236,7 @@ const ProductDetailDrawer = () => {
 
     if (file.response?.public_id) {
       try {
-        const res = await fetch("http://localhost:8080/cloudinary/delete", {
+        const res = await fetch(`${baseUrl}/cloudinary/delete`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ public_id: file.response?.public_id }),

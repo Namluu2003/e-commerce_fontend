@@ -3,12 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import {Badge, Button, Card, Collapse, Descriptions, Form, Image, List, Modal, Select, Steps, Table, Tag} from "antd";
 
 import axios from "axios";
-import {
-    baseUrl,
-    convertBillStatusToString, convertDate,
-    convertLongTimestampToDate, formatVND,
-    generateAddressString
-} from "../../helpers/Helpers.js";
+import { baseUrl, convertBillStatusToString, convertDate, convertLongTimestampToDate, formatVND, generateAddressString } from "../../helpers/Helpers.js";
 import StepProgress from "./componets/StepProgress.jsx";
 import {FaFileCircleCheck} from "react-icons/fa6";
 
@@ -647,7 +642,7 @@ const BillDetail = () => {
             setIsShowPdfOk(false)
             try {
                 // Lấy dữ liệu PDF từ API với responseType là 'blob'
-                const response = await axios.get(`http://localhost:8080/api/admin/bill/print-bill/${id}`, {
+                const response = await axios.get(`${baseUrl}/api/admin/bill/print-bill/${id}`, {
                     responseType: 'blob'
                 });
                 // Tạo URL cho blob

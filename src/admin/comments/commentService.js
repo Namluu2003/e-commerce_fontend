@@ -1,6 +1,7 @@
+import { baseUrl, wsBaseUrl } from "../../helpers/Helpers.js";
 import { Client } from "@stomp/stompjs";
 
-const API_BASE_URL = "http://localhost:8080/api/admin/comments";
+const API_BASE_URL = `${baseUrl}/api/admin/comments`;
 
 // Hàm lấy tất cả comments
 export const fetchAllComments = async (page = 0, size = 5, sortOrder = "desc") => {
@@ -66,7 +67,7 @@ export const deleteComment = async (commentId) => {
 
 // Hàm kết nối WebSocket
 export const connectWebSocket = (onMessage, onAdminReply) => {
-    const socket = new WebSocket("ws://localhost:8080/ws");
+    const socket = new WebSocket(`${wsBaseUrl}/ws`);
     const client = new Client({
         webSocketFactory: () => socket,
         reconnectDelay: 5000,

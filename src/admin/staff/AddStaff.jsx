@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import React, { useState, useEffect, useRef } from 'react';
 import {Form, Input, Button, Radio, DatePicker, Upload, message, Row, Col, Card, Spin, Modal, Select} from 'antd';
 import { UploadOutlined, UserOutlined } from '@ant-design/icons';
@@ -88,7 +89,7 @@ const AddStaff = () => {
 
         try {
             const deleteRequests = publicIds.map((id) =>
-                fetch("http://localhost:8080/cloudinary/delete", {
+                fetch(`${baseUrl}/cloudinary/delete`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ public_id: id }),
@@ -142,7 +143,7 @@ const AddStaff = () => {
     const handleRemove = async (file) => {
         if (file.response?.public_id) {
             try {
-                await fetch("http://localhost:8080/cloudinary/delete", {
+                await fetch(`${baseUrl}/cloudinary/delete`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ public_id: file.response.public_id }),
@@ -255,7 +256,7 @@ const AddStaff = () => {
                 password: newPassword,
             };
 
-            await axios.post('http://localhost:8080/api/admin/staff/add', newData);
+            await axios.post(`${baseUrl}/api/admin/staff/add`, newData);
             toast.success("Thêm nhân viên thành công! Mật khẩu tạm thời đã được gửi đến email của nhân viên.");
             form.resetFields();
             setFileList([]);

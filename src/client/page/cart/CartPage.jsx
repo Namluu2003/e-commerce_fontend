@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -94,7 +95,7 @@ const CartPage = () => {
 
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/client/getallcartforcustomerid",
+          `${baseUrl}/api/client/getallcartforcustomerid`,
           {
             params: {
               customerId: user.id,
@@ -151,7 +152,7 @@ const CartPage = () => {
   const deleteItemInCart = async (cartDetailId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/client/delete/${cartDetailId}`
+        `${baseUrl}/api/client/delete/${cartDetailId}`
       );
       fetchCart();
       window.dispatchEvent(new Event("cartUpdated"));

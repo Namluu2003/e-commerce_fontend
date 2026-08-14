@@ -1,3 +1,4 @@
+import { baseUrl, wsBaseUrl } from "../../../helpers/Helpers.js";
 import React, { useEffect, useState, useRef } from "react";
 import { Client } from "@stomp/stompjs";
 import {
@@ -40,7 +41,7 @@ const CommentSection = ({ id }) => {
   
   const fetchComments = async () => {
     try {
-        const response = await fetch(`http://localhost:8080/comments/${productId}`);
+        const response = await fetch(`${baseUrl}/comments/${productId}`);
         if (!response.ok) throw new Error("Lỗi khi tải bình luận");
 
         const data = await response.json();
@@ -56,7 +57,7 @@ const CommentSection = ({ id }) => {
 };
 
 const connectWebSocket = () => {
-  const socket = new WebSocket("ws://localhost:8080/ws");
+  const socket = new WebSocket(`${wsBaseUrl}/ws`);
   stompClient.current = new Client({
     webSocketFactory: () => socket,
     reconnectDelay: 5000,
@@ -270,7 +271,7 @@ const CommentSection = ({ id }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/admin/comments/all");
+      const response = await fetch(`${baseUrl}/api/admin/comments/all`);
       if (!response.ok) throw new Error(`Lỗi: ${response.status}`);
 
       const result = await response.json();
@@ -308,7 +309,7 @@ const CommentSection = ({ id }) => {
   };
 
   const connectWebSocket = () => {
-    const socket = new WebSocket("ws://localhost:8080/ws");
+    const socket = new WebSocket(`${wsBaseUrl}/ws`);
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,

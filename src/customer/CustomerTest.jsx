@@ -12,7 +12,7 @@ import moment from 'moment';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {FaEdit, FaMapMarkedAlt} from "react-icons/fa";
-import {generateAddressString} from "../helpers/Helpers.js";
+import { generateAddressString, baseUrl } from "../helpers/Helpers.js";
 import {COLORS} from "../constants/constants.js";
 import {Tooltip} from 'antd';
 import * as XLSX from 'xlsx';
@@ -135,7 +135,7 @@ const CustomerTest = () => {
             size: size
         };
         
-        axios.get('http://localhost:8080/api/admin/customers/index', {params})
+        axios.get(`${baseUrl}/api/admin/customers/index`, {params})
             .then((response) => {
                 const { content, totalElements } = response.data;
                 const fetchedData = content.map((item, index) => ({
@@ -174,7 +174,7 @@ const CustomerTest = () => {
             size: pagination.pageSize
         };
 
-        axios.get('http://localhost:8080/api/admin/customers/index', {params})
+        axios.get(`${baseUrl}/api/admin/customers/index`, {params})
             .then((response) => {
                 const { content, totalElements } = response.data;
                 const fetchedData = content.map((item, index) => ({
@@ -216,7 +216,7 @@ const CustomerTest = () => {
             size: pagination.pageSize
         };
 
-        axios.get('http://localhost:8080/api/admin/customers/index', {params})
+        axios.get(`${baseUrl}/api/admin/customers/index`, {params})
             .then((response) => {
                 const { content, totalElements } = response.data;
                 const fetchedData = content.map((item, index) => ({
@@ -305,7 +305,7 @@ const CustomerTest = () => {
         try {
             // Gọi API thêm địa chỉ
             const response = await axios.post(
-                `http://localhost:8080/api/admin/customers/add-address/${recordSelected.id}`,
+                `${baseUrl}/api/admin/customers/add-address/${recordSelected.id}`,
                 newAddress
             );
             console.log(newAddress)
@@ -342,7 +342,7 @@ const CustomerTest = () => {
     const handleEditAddress = async (addressId) => {
         try {
             const response = await axios.put(
-                `http://localhost:8080/api/admin/customers/update-address/${addressId}`,
+                `${baseUrl}/api/admin/customers/update-address/${addressId}`,
                 newAddress
             );
 
@@ -382,7 +382,7 @@ const CustomerTest = () => {
     };
     const handleSetDefaultAddress = (addressId) => {
         axios
-            .put(`http://localhost:8080/api/admin/customers/set-default-address/${addressId}`)
+            .put(`${baseUrl}/api/admin/customers/set-default-address/${addressId}`)
             .then(() => {
                 toast.success('Đặt làm mặc định thành công!');
 

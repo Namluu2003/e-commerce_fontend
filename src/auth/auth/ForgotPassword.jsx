@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import React, { useState } from 'react';
 import { Form, Input, Button, message, Spin, Typography } from 'antd';
 import { MailOutlined, LoadingOutlined } from '@ant-design/icons';
@@ -18,7 +19,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-          `http://localhost:8080/api/authentication/forgot-password/${encodeURIComponent(values.email)}`
+          `${baseUrl}/api/authentication/forgot-password/${encodeURIComponent(values.email)}`
       );
       console.log('Password reset request response:', response.data);
       toast.success('Vui lòng kiểm tra email để khôi phục mật khẩu!');

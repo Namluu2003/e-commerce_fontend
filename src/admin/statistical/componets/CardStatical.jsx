@@ -1,3 +1,4 @@
+import { baseUrl } from "../../../helpers/Helpers.js";
 import React, { useState, useEffect } from "react";
 import { Table, InputNumber, Card, Row, Col, Spin } from "antd";
 import { CalendarOutlined, RiseOutlined, FallOutlined } from "@ant-design/icons";
@@ -35,7 +36,7 @@ const LowStockProducts = () => {
       if (quantity < 1) return; // Đảm bảo quantity hợp lệ
 
       try {
-        const response = await fetch(`http://localhost:8080/api/admin/statistical/minProduct?quantity=${quantity}`);
+        const response = await fetch(`${baseUrl}/api/admin/statistical/minProduct?quantity=${quantity}`);
         const result = await response.json();
 
         console.log("API response:", result);
@@ -123,10 +124,10 @@ const StatisticsSummary = () => {
     const fetchStatistics = async () => {
       try {
         const [monthlyResponse, yearlyResponse,monthProductResponse,yearProductResponse] = await Promise.all([
-          fetch("http://localhost:8080/api/admin/statistical/growthRateMonth"),
-          fetch("http://localhost:8080/api/admin/statistical/growthRateYear"),
-          fetch("http://localhost:8080/api/admin/statistical/growthRateProductM"),
-          fetch("http://localhost:8080/api/admin/statistical/growthRateProductY"),
+          fetch(`${baseUrl}/api/admin/statistical/growthRateMonth`),
+          fetch(`${baseUrl}/api/admin/statistical/growthRateYear`),
+          fetch(`${baseUrl}/api/admin/statistical/growthRateProductM`),
+          fetch(`${baseUrl}/api/admin/statistical/growthRateProductY`),
 
         ]);
 

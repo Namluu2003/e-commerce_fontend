@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -40,7 +41,7 @@ const Login = () => {
 
         try {
             const response = await axios.post(
-                "http://localhost:8080/api/authentication/login",
+                `${baseUrl}/api/authentication/login`,
                 {
                     email: formData.email.trim(),
                     password: formData.password.trim(),
@@ -83,7 +84,7 @@ const Login = () => {
             const googleToken = credential;
 
             // Send Google token to backend for validation
-            const res = await axios.post(`http://localhost:8080/api/authentication/google-login/${googleToken}`)
+            const res = await axios.post(`${baseUrl}/api/authentication/google-login/${googleToken}`)
 
             if (res.status === 200) {
                 // Save user data to localStorage or handle further logic here

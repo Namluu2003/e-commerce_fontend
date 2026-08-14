@@ -24,7 +24,7 @@ import {
 } from "@ant-design/icons";
 import AddressSelectorAntd from "../utils/AddressSelectorAntd"; // Đảm bảo đúng đường dẫn
 import { FaMapMarkedAlt } from "react-icons/fa"; // Import icon
-import { generateAddressString } from "../../helpers/Helpers.js";
+import { generateAddressString, baseUrl } from "../../helpers/Helpers.js";
 import {toast} from "react-toastify"; // Đảm bảo đúng đường dẫn
 import PurchaseOrder from "../../client/PurchaseOrder/PurchaseOrder.jsx";
 
@@ -107,7 +107,7 @@ const CustomerProfile = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/admin/customers/detail/${id}`
+        `${baseUrl}/api/admin/customers/detail/${id}`
       );
       const customerData = response.data;
 
@@ -313,7 +313,7 @@ const CustomerProfile = () => {
         wardId: Number(newAddress.wardId),
       };
       await axios.post(
-        `http://localhost:8080/api/admin/customers/add-address/${customerId}`,
+        `${baseUrl}/api/admin/customers/add-address/${customerId}`,
         addressPayload
       );
       message.success("Thêm địa chỉ thành công!");
@@ -358,7 +358,7 @@ const CustomerProfile = () => {
         wardId: Number(newAddress.wardId),
       };
       await axios.put(
-        `http://localhost:8080/api/admin/customers/update-address/${editingAddressId}`,
+        `${baseUrl}/api/admin/customers/update-address/${editingAddressId}`,
         addressPayload
       );
       message.success("Cập nhật địa chỉ thành công!");
@@ -384,7 +384,7 @@ const CustomerProfile = () => {
     setLoading(true);
     axios
       .put(
-        `http://localhost:8080/api/admin/customers/set-default-address/${addressId}`
+        `${baseUrl}/api/admin/customers/set-default-address/${addressId}`
       )
       .then(() => {
         toast.success("Đặt làm mặc định thành công!");
@@ -550,7 +550,7 @@ const CustomerProfile = () => {
       if (publicId && publicId !== "-1") {
         console.log("Attempting to delete image with public_id:", publicId);
         // Gửi yêu cầu đến backend của bạn để xóa khỏi Cloudinary
-        await axios.post("http://localhost:8080/cloudinary/delete", {
+        await axios.post(`${baseUrl}/cloudinary/delete`, {
           public_id: publicId, // Đảm bảo backend của bạn mong đợi 'public_id'
         });
         message.success("Xóa ảnh đại diện thành công!");
@@ -615,7 +615,7 @@ const CustomerProfile = () => {
           );
           // Cân nhắc thêm logic xóa ở đây nếu `handleRemove` không đảm bảo
           try {
-            await axios.post("http://localhost:8080/cloudinary/delete", {
+            await axios.post(`${baseUrl}/cloudinary/delete`, {
               public_id: avatarPublicId,
             });
             console.log("Old avatar deleted during save.");
@@ -651,7 +651,7 @@ const CustomerProfile = () => {
 
       // 3. Cập nhật Thông tin Cơ bản của Khách hàng qua API
       await axios.put(
-        `http://localhost:8080/api/admin/customers/update/${customerId}`,
+        `${baseUrl}/api/admin/customers/update/${customerId}`,
         customerUpdateData
       );
       console.log("Customer basic info updated.");
@@ -674,7 +674,7 @@ const CustomerProfile = () => {
             isAddressDefault: true, // Đảm bảo nó vẫn là mặc định
           };
           await axios.put(
-            `http://localhost:8080/api/admin/customers/update-address/${defaultAddressId}`,
+            `${baseUrl}/api/admin/customers/update-address/${defaultAddressId}`,
             addressPayload
           );
           console.log("Existing default address updated.");
@@ -683,7 +683,7 @@ const CustomerProfile = () => {
             "Default address exists, but input fields are empty/incomplete in edit form. No address update performed."
           );
           // Tùy chọn: Xóa địa chỉ mặc định nếu người dùng cố tình xóa các trường?
-          // await axios.delete(`http://localhost:8080/api/admin/customers/delete-address/${defaultAddressId}`);
+          // await axios.delete(`${baseUrl}/api/admin/customers/delete-address/${defaultAddressId}`);
           // message.info("Đã xóa địa chỉ mặc định vì các trường đã bị xóa.");
         }
       } else if (hasAddressInput) {
@@ -696,7 +696,7 @@ const CustomerProfile = () => {
           isAddressDefault: true, // Đặt địa chỉ này làm mặc định
         };
         await axios.post(
-          `http://localhost:8080/api/admin/customers/add-address/${customerId}`,
+          `${baseUrl}/api/admin/customers/add-address/${customerId}`,
           addressPayload
         );
         console.log("New default address added.");

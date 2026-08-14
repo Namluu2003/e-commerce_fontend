@@ -1,3 +1,4 @@
+import { baseUrl } from "../../helpers/Helpers.js";
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Form, Input, Select, DatePicker, Button, Upload, message, Row, Col, Card, Radio } from 'antd';
@@ -38,7 +39,7 @@ const EditStaff = () => {
         try {
             await Promise.all(
                 imageIds.map(id =>
-                    axios.post('http://localhost:8080/cloudinary/delete', { public_id: id })
+                    axios.post(`${baseUrl}/cloudinary/delete`, { public_id: id })
                 )
             );
         } catch (error) {
@@ -90,7 +91,7 @@ const EditStaff = () => {
     // Handle image removal
     const handleRemove = async (file) => {
         try {
-            await axios.post('http://localhost:8080/cloudinary/delete', {
+            await axios.post(`${baseUrl}/cloudinary/delete`, {
                 public_id: file.uid
             });
             setCleanUpImage(prev => prev.filter(id => id !== file.uid));
@@ -114,7 +115,7 @@ const EditStaff = () => {
 
     useEffect(() => {
         const staffId = location.pathname.split('/').pop();
-        axios.get(`http://localhost:8080/api/admin/staff/detail/${staffId}`)
+        axios.get(`${baseUrl}/api/admin/staff/detail/${staffId}`)
             .then((response) => {
                 const staffData = response.data;
                 setStaff(staffData);
@@ -159,7 +160,7 @@ const EditStaff = () => {
         };
 
         try {
-            await axios.put(`http://localhost:8080/api/admin/staff/update/${staff.id}`, updatedData);
+            await axios.put(`${baseUrl}/api/admin/staff/update/${staff.id}`, updatedData);
             toast.success('Cập nhật nhân viên thành công!');
             navigate('/admin/staff');
         } catch (error) {

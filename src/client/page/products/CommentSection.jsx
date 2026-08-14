@@ -1,3 +1,4 @@
+import { baseUrl, wsBaseUrl } from "../../../helpers/Helpers.js";
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Client } from "@stomp/stompjs";
 import { Input, Button, List, Card, Space, Typography, Avatar, Col, Row, Select, Tooltip } from "antd";
@@ -167,7 +168,7 @@ const CommentSection = ({ id }) => {
   // Tối ưu hàm fetchComments
   const fetchComments = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/admin/comments/product", {
+      const response = await axios.get(`${baseUrl}/api/admin/comments/product`, {
         params: { productId },
       });
       
@@ -312,7 +313,7 @@ const CommentSection = ({ id }) => {
   // Tối ưu hàm connectWebSocket
 // Tối ưu hàm connectWebSocket
 const connectWebSocket = useCallback(() => {
-  const socket = new WebSocket("ws://localhost:8080/ws");
+  const socket = new WebSocket(`${wsBaseUrl}/ws`);
   const client = new Client({
     webSocketFactory: () => socket,
     reconnectDelay: 5000,
