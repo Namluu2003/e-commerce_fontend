@@ -1,0 +1,31 @@
+/* styles.module.css */
+.buttonDelete:hover {
+  background-color: #ff4d4f;
+  color: red !important ;
+  border-color: #ff4d4f !important;
+}
+
+.statushd {
+  border-color: green !important;
+  color: green !important;
+}
+
+.statusnhd {
+  border-color: red !important;
+  color: red !important;
+}
+
+.statushdhv:hover {
+  color: green !important;
+}
+
+.statusnhdhv:hover {
+  color: red !important;
+}
+.customTable {
+  width: 100%;
+  table-layout: fixed; /* Cố định bố cục bảng */
+  
+}
+
+

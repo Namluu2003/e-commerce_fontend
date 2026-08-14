@@ -1,0 +1,30 @@
+.rating-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.stars {
+    color: gold;
+    font-size: 20px;
+    margin-bottom : 0.2rem
+   
+}
+
+.vertical-line1 {
+    width: 1px;
+    height: 20px;
+    background-color: #ccc;
+    margin: 0 8px;
+}
+
+.rating-label {
+    font-size: small;
+    color: #333;
+}
+
+.empty-stars {
+    color: lightgray;
+    /* Màu của ngôi sao trống */
+    float: right;
+}

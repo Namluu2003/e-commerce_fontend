@@ -1,0 +1,499 @@
+/* CustomerPolicyPage.module.css - Optimized and color-matched to The Handz logo */
+
+.policyContainer {
+  /* Updated color palette based on The Handz logo */
+  --primary-color: #f89e4f; /* Orange from logo */
+  --primary-hover: #e58a3a; /* Darker orange */
+  --secondary-color: #4290c9; /* Blue from shoe */
+  --secondary-hover: #3376ad; /* Darker blue */
+  --accent-color: #90d4c5; /* Light teal from bottom right */
+  --text-color: #333333;
+  --light-text: #666666;
+  --header-bg: #f9f9f9;
+  --border-color: #e5e7eb;
+  --light-bg: #f3f4f6;
+  --card-bg: #ffffff;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --transition: all 0.3s ease;
+  
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header styles */
+.policyHeader {
+  background-color: var(--header-bg);
+  padding: 3rem 2rem;
+  text-align: center;
+  margin: 1.5rem 0 3rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  background-image: linear-gradient(135deg, rgba(248, 158, 79, 0.1), rgba(144, 212, 197, 0.15));
+}
+
+.policyHeader h1 {
+  font-size: 2.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.policyHeader p {
+  font-size: 1.125rem;
+  color: var(--light-text);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+/* Main content layout */
+.policyWrapper {
+  display: flex;
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.policySidebar {
+  width: 25%;
+  min-width: 200px;
+}
+
+.policyNav {
+  position: sticky;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: var(--card-bg);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.policyNav button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--light-text);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.policyNav button:hover {
+  background-color: var(--light-bg);
+  color: var(--secondary-color);
+}
+
+.policyNav button.activeTab {
+  background-color: rgba(248, 158, 79, 0.15);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.policyMain {
+  flex: 1;
+  max-width: 75%;
+}
+
+/* Policy content styles */
+.policyContent {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2.5rem;
+}
+
+.policyContent h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border-color);
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.policyText h3 {
+  font-size: 1.25rem;
+  margin: 1.75rem 0 0.75rem;
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.policyText p {
+  margin-bottom: 1rem;
+  color: var(--light-text);
+}
+
+.policyText ul {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.policyText li {
+  margin-bottom: 0.5rem;
+  color: var(--light-text);
+}
+
+/* FAQ Section styles */
+.faqSection {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2.5rem;
+}
+
+.faqSection h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.75rem;
+  text-align: center;
+  color: var(--primary-color);
+  font-weight: 700;
+  position: relative;
+}
+
+.faqSection h2::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 3px;
+  background-color: var(--primary-color);
+  margin: 0.75rem auto 0;
+  opacity: 0.6;
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faqItem {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.faqItem:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.faqQuestion {
+  padding: 1.25rem;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  list-style: none;
+  color: var(--text-color);
+}
+
+.faqQuestion::after {
+  content: "+";
+  position: absolute;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+  transition: var(--transition);
+}
+
+.faqItem[open] .faqQuestion::after {
+  content: "-";
+}
+
+.faqAnswer {
+  padding: 0 1.25rem 1.25rem;
+  color: var(--light-text);
+}
+
+/* Feedback Section styles */
+.feedbackSection {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.feedbackSection h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.feedbackSection > p {
+  margin-bottom: 1.5rem;
+  color: var(--light-text);
+}
+
+.feedbackForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.formGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.formGroup input,
+.formGroup textarea {
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(66, 144, 201, 0.2);
+}
+
+.submitBtn {
+  align-self: flex-start;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.submitBtn:hover {
+  background-color: var(--primary-hover);
+}
+
+.successMessage {
+  background-color: rgba(144, 212, 197, 0.2);
+  border: 1px solid rgba(144, 212, 197, 0.5);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  margin: 1rem 0;
+  color: #2a7d6a;
+}
+
+/* Footer styles */
+.footer {
+  margin-top: 3rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 3rem;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footerInfo {
+  display: flex;
+  flex: 2;
+  gap: 3rem;
+}
+
+.companyInfo {
+  flex: 1;
+}
+
+.companyInfo h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.companyInfo p {
+  margin-bottom: 0.5rem;
+  color: var(--light-text);
+  font-size: 0.95rem;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 3rem;
+  flex: 1;
+}
+
+.linkGroup h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}
+
+.linkGroup ul {
+  list-style: none;
+  padding: 0;
+}
+
+.linkGroup li {
+  margin-bottom: 0.75rem;
+}
+
+.linkGroup a {
+  color: var(--light-text);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.linkGroup a:hover {
+  color: var(--primary-color);
+}
+
+.newsletter {
+  flex: 1;
+}
+
+.newsletter h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--secondary-color);
+}
+
+.newsletter p {
+  color: var(--light-text);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.subscribeForm {
+  display: flex;
+}
+
+.subscribeForm input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  font-family: inherit;
+}
+
+.subscribeForm button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.subscribeForm button:hover {
+  background-color: var(--primary-hover);
+}
+
+.copyright {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: var(--light-text);
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .policyWrapper {
+    flex-direction: column;
+  }
+  
+  .policySidebar {
+    width: 100%;
+    min-width: 100%;
+  }
+  
+  .policyNav {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .policyNav button {
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+  }
+  
+  .policyMain {
+    max-width: 100%;
+  }
+  
+  .formRow {
+    flex-direction: column;
+  }
+  
+  .footerContent {
+    flex-direction: column;
+  }
+  
+  .footerInfo {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .footerLinks {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .policyHeader {
+    padding: 2rem 1rem;
+  }
+  
+  .policyHeader h1 {
+    font-size: 1.75rem;
+  }
+  
+  .policyContent,
+  .faqSection,
+  .feedbackSection {
+    padding: 1.5rem;
+  }
+  
+  .policyContent h2,
+  .faqSection h2,
+  .feedbackSection h2 {
+    font-size: 1.5rem;
+  }
+  
+  .footerLinks {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}

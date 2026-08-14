@@ -1,0 +1,573 @@
+.searchBillContainer {
+  /* max-width: 1000px; */
+  /* margin: 0 auto; */
+  padding: 30px;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  color: #333;
+  background-color: #fff9f4; /* Lighter orange/peach background */
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
+}
+
+.pageHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.pageTitle {
+  margin: 0;
+  color: #ff9b42; /* Orange from logo */
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.pageSubtitle {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.searchForm {
+  margin-bottom: 40px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(255, 155, 66, 0.1); /* Orange shadow */
+}
+
+.inputGroup {
+  display: flex;
+  gap: 15px;
+}
+
+.inputWrapper {
+  position: relative;
+  flex: 1;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 15px 15px 15px 45px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #2680eb; /* Blue from logo */
+  box-shadow: 0 0 0 3px rgba(38, 128, 235, 0.2);
+}
+
+.searchButton {
+  background-color: #2680eb; /* Blue from logo */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0 30px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchButton:hover {
+  background-color: #1a6bca; /* Darker blue */
+  transform: translateY(-1px);
+}
+
+.searchButton:active {
+  transform: translateY(0);
+}
+
+.searchTips {
+  margin-top: 15px;
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  color: #64748b;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 155, 66, 0.1); /* Light orange */
+  border-radius: 50%;
+  border-top: 4px solid #ff9b42; /* Orange from logo */
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error {
+  text-align: center;
+  margin: 30px 0;
+  color: #ef4444;
+  font-weight: 500;
+  padding: 15px;
+  background-color: #fef2f2;
+  border-radius: 6px;
+  border-left: 4px solid #ef4444;
+}
+
+.billContainer {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(255, 155, 66, 0.1); /* Orange shadow */
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.billHeader {
+  padding: 25px 30px;
+  background-color: #fff9f4; /* Light orange background */
+  border-bottom: 1px solid #ffdfc4; /* Light orange border */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.billHeaderLeft h2 {
+  margin: 0 0 10px 0;
+  color: #ff9b42; /* Orange from logo */
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.billMeta {
+  display: flex;
+  gap: 20px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.metaIcon {
+  margin-right: 8px;
+}
+
+.billHeaderRight {
+  display: flex;
+  align-items: center;
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+}
+
+/* Thêm các class CSS mới cho trạng thái hóa đơn */
+
+.statusConfirmed {
+  background-color: #4c9aff;
+  color: white;
+}
+
+.statusAwaitingShipment {
+  background-color: #6554c0;
+  color: white;
+}
+
+.statusPaid {
+  background-color: #36b37e;
+  color: white;
+}
+
+.statusCompleted {
+  background-color: #00875a;
+  color: white;
+}
+
+.statusReturned {
+  background-color: #ff5630;
+  color: white;
+}
+
+/* Các class CSS đã có (giữ nguyên) */
+.statusPending {
+  background-color: #ffab00;
+  color: white;
+}
+
+.statusShipping {
+  background-color: #0747a6;
+  color: white;
+}
+
+.statusCancelled {
+  background-color: #de350b;
+  color: white;
+}
+
+.billProgressContainer {
+  padding: 30px;
+  background-color: white;
+  border-bottom: 1px solid #ffdfc4; /* Light orange border */
+}
+
+.billProgress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.progressIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 16px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.progressText {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.progressLine {
+  flex: 1;
+  height: 3px;
+  background-color: #e2e8f0;
+  position: relative;
+  z-index: 1;
+}
+
+.progressStep.progressActive .progressIcon {
+  background-color: orange; /* Blue from logo */
+  color: white;
+}
+
+.progressStep.progressActive .progressText {
+  color: orange; /* Blue from logo */
+  font-weight: 600;
+}
+
+.progressLine.progressActive {
+  background-color: orange; /* Blue from logo */
+}
+
+.billDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 30px;
+  border-bottom: 1px solid #ffdfc4; /* Light orange border */
+}
+
+.detailSection h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #2680eb; /* Blue from logo */
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ffdfc4; /* Light orange border */
+  display: flex;
+  align-items: center;
+}
+
+.sectionIcon {
+  margin-right: 10px;
+  color: #2680eb; /* Blue from logo */
+}
+
+.detailContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailLabel {
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.inlineIcon {
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+.detailValue {
+  color: #334155;
+  font-weight: 500;
+}
+
+.voucherCode {
+  background-color: #fff3e0; /* Light orange */
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ff9b42; /* Orange from logo */
+  margin-right: 10px;
+}
+
+.voucherDiscount {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.productSection {
+  padding: 30px;
+  border-bottom: 1px solid #ffdfc4; /* Light orange border */
+}
+
+.productSection h3 {
+  margin-top: 0;
+  color: #2680eb; /* Blue from logo */
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ffdfc4; /* Light orange border */
+  display: flex;
+  align-items: center;
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.productItem {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff9f4; /* Light orange background */
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(255, 155, 66, 0.1); /* Orange shadow */
+}
+
+.productItem:hover {
+  transform: translateY(-2px);
+}
+
+.productImage {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-right: 15px;
+  border: 1px solid #ffdfc4; /* Light orange border */
+  background-color: white;
+}
+
+.productImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.productInfo {
+  flex: 1;
+}
+
+.productInfo h4 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.productMeta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 8px;
+}
+
+.productMetaItem {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.productPriceInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.productPrice {
+  font-weight: 600;
+  color: #334155;
+}
+
+.productQuantity {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.productTotal {
+  font-weight: 700;
+  font-size: 16px;
+  color: #2680eb; /* Blue from logo */
+}
+
+.billSummary {
+  padding: 30px;
+  background-color: #fff9f4; /* Light orange background */
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #64748b;
+}
+
+.discountAmount {
+  color: #10b981;
+  font-weight: 500;
+}
+
+.totalRow {
+  padding-top: 15px;
+  margin-top: 15px;
+  border-top: 1px solid #ffdfc4; /* Light orange border */
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff9b42; /* Orange from logo */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .billDetails {
+    grid-template-columns: 1fr;
+  }
+  
+  .inputGroup {
+    flex-direction: column;
+  }
+  
+  .searchButton {
+    padding: 15px;
+  }
+  
+  .billHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .billHeaderRight {
+    margin-top: 15px;
+  }
+  
+  .billMeta {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .productItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .productImage {
+    margin-bottom: 15px;
+    margin-right: 0;
+  }
+  
+  .productTotal {
+    margin-top: 15px;
+    align-self: flex-end;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .searchBillContainer {
+    padding: 15px;
+  }
+  
+  .pageTitle {
+    font-size: 24px;
+  }
+  
+  .searchForm {
+    padding: 20px;
+  }
+  
+  .billProgress {
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  
+  .progressStep {
+    min-width: 80px;
+  }
+  
+  .progressText {
+    font-size: 12px;
+  }
+  
+  .progressIcon {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+  
+  .billDetails, .productSection, .billSummary {
+    padding: 20px;
+  }
+}

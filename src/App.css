@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Gidole&display=swap');
+
+/* Các style khác của bạn */
+.sidebar {
+  color: #fff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 10px;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.logo-icon {
+  width: 90px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5 rem;
+  border-radius: 50%;
+  padding-top: 30px;
+  border-radius: 4%;
+}
+
+.menu-bar  {
+  /* height: 88vh; */
+  overflow-y: auto ; /* Enables scrolling when content exceeds the height */
+  max-height: 155vh;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 1rem;
+  position: relative;
+  
+}
+.toggle-theme-btn {
+  position: relative;
+  bottom: 30px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 1rem;
+  margin-top: 2rem;
+}
+.toggle {
+  margin-left: 15px;
+}
+
+
+@media (max-width: 768px) {
+  .login-form {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .login-form {
+    width: 90%;
+  }
+}
+
+
+
+.arrow-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 60px;
+}
+
+.arrow {
+
+  width: 100%;
+  height: 38px;
+  position: relative;
+  clip-path: polygon(95% 0, 100% 50%, 94% 100%, 0% 100%, 6% 51%, 0% 0%);
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.ant-tabs-tab-remove {
+  color: red !important;
+}
+
+/* cong */
+/* Cho riêng phần menu bên trái */
+.ant-segmented-item.ant-segmented-item-selected {
+  background-color: #F37021 !important; /* Màu primary trong Ant Design */
+  color: white; /* Đổi màu chữ khi được chọn */
+}

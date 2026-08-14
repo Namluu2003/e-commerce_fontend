@@ -1,0 +1,249 @@
+  .contactWrapper {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color:white
+  }
+  
+  .contactContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 15px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .storeInfoSection {
+    flex: 1;
+    min-width: 300px;
+    padding-right: 40px;
+  }
+  
+  .contactFormSection {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .storeImageContainer {
+    margin-bottom: 20px;
+  }
+  
+  .storeImage {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+  }
+  
+  .storeDescription {
+    margin-bottom: 30px;
+  }
+  
+  .storeDescription h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #000;
+  }
+  
+  .storeDescription p, 
+  .storeDescription li {
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: justify;
+  }
+  
+  .storeDescription ul {
+    padding-left: 20px;
+    list-style-type: disc;
+  }
+  
+  .storeDescription a,
+  .contactDetail a {
+    color: #d7292e;
+    text-decoration: none;
+  }
+  
+  .storeDescription a:hover,
+  .contactDetail a:hover {
+    text-decoration: underline;
+  }
+  
+  .brandName {
+    color: #d7292e;
+    font-weight: 600;
+  }
+  
+  .contactInfoSection {
+    margin-top: 20px;
+  }
+  
+  .contactDetail {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .contactDetail strong {
+    color: #000;
+    font-weight: 600;
+  }
+  
+  .mapContainer {
+    margin: 20px 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .additionalInfo {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  
+  .additionalInfo p {
+    margin-bottom: 8px;
+  }
+  
+  .formBox {
+    background-color: #fff;
+    padding: 1rem;
+  }
+  
+  .formBox h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #000;
+  }
+  
+  .formDesc {
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  
+  .contactForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formGroup {
+    margin-bottom: 18px;
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .required {
+    color: #d7292e;
+  }
+  
+  .formGroup input,
+  .formGroup textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+  }
+  
+  .formGroup input:focus,
+  .formGroup textarea:focus {
+    border-color: #d7292e;
+    outline: none;
+  }
+  
+  .formGroup textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .submitButton {
+    background-color: #d7292e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    align-self: flex-start;
+  }
+  
+  .submitButton:hover {
+    background-color: #b51e23;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 992px) {
+    .contactContainer {
+      flex-direction: column;
+    }
+    
+    .storeInfoSection {
+      padding-right: 0;
+      margin-bottom: 30px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .submitButton {
+      width: 100%;
+    }
+  }
+
+
+  /* === BỔ SUNG CSS CHO VALIDATION === */
+
+.errorMessage {
+  color: #d7292e; /* Màu đỏ cho thông báo lỗi */
+  font-size: 0.8rem; /* Cỡ chữ nhỏ hơn */
+  margin-top: 5px; /* Khoảng cách với input phía trên */
+  display: block; /* Để hiển thị đúng */
+}
+
+/* Class để thêm viền đỏ cho input/textarea khi có lỗi */
+.inputError {
+  border-color: #d7292e !important; /* Sử dụng !important để ghi đè nếu cần */
+  /* box-shadow: 0 0 0 1px #d7292e; */ /* Tùy chọn: thêm hiệu ứng shadow */
+}
+
+/* Đảm bảo focus vào input lỗi vẫn giữ màu viền lỗi */
+.formGroup input.inputError:focus,
+.formGroup textarea.inputError:focus {
+  border-color: #d7292e !important;
+  box-shadow: 0 0 0 2px rgba(215, 41, 46, 0.2); /* Hiệu ứng focus tùy chỉnh cho lỗi */
+}
+
+/* === CẬP NHẬT CSS KHÁC (NẾU CẦN) === */
+
+/* Đảm bảo input và textarea chiếm đủ chiều rộng */
+.formGroup input,
+.formGroup textarea {
+  box-sizing: border-box; /* Bao gồm padding và border trong width/height */
+  width: 100%;
+  /* Các thuộc tính khác giữ nguyên */
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s; /* Thêm transition cho box-shadow */
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: #5a5a5a; /* Màu viền khi focus (có thể giữ màu đỏ nếu đang lỗi) */
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(90, 90, 90, 0.2); /* Hiệu ứng focus nhẹ */
+}
+
+/* Sửa lỗi src iframe google map không hợp lệ */
+/* Bạn cần thay thế src trong thẻ iframe bằng mã nhúng Google Maps hợp lệ */
+/* Ví dụ src hợp lệ đã được cập nhật trong code JSX ở trên */
+
+/* ... các style khác giữ nguyên ... */

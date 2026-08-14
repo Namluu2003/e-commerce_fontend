@@ -1,0 +1,12 @@
+.productcard {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  will-change: transform, box-shadow;
+  border-radius: 8px;
+}
+
+.productcard:hover {
+  transform: translateY(-2px); /* Không scale, chỉ di chuyển lên */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15); /* Bóng nhẹ hơn */
+  border-color: #ee4d2d;
+}
+

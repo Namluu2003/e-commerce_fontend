@@ -1,0 +1,9 @@
+.custom-modal-button {
+    background-color: red; /* Màu nền */
+    color: #1A3353; /* Màu chữ */
+    border: none; /* Bỏ viền */
+}
+
+.custom-modal-button:hover {
+    background-color: #A3C1E0; /* Màu nền khi hover */
+}

@@ -1,0 +1,77 @@
+.container {
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .searchContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .searchLabel {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .searchInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .addButton {
+    background-color: #28a745; /* Example green color */
+    color: white;
+    border: none;
+    padding: 30px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .plusIcon {
+    margin-right: 5px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .noData {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .noDataIcon {
+    margin-bottom: 10px;
+    color: #999; /* Example grey color for the icon */
+  }
+  
+  .noDataIcon svg {
+    width: 30px;
+    height: 30px;
+  }

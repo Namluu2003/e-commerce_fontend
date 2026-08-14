@@ -1,0 +1,50 @@
+.chat-container {
+  padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.message {
+  margin-bottom: 16px;
+}
+
+.message.user {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.message.assistant {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.question {
+  color: #2563eb; /* Màu xanh dương đậm */
+  font-weight: 600;
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #eff6ff;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.answer {
+  color: #374151; /* Màu xám đậm */
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #f9fafb;
+  white-space: pre-wrap;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.answer ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.answer li {
+  margin-bottom: 4px;
+} 
