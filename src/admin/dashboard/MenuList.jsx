@@ -1,13 +1,14 @@
 import { Menu, Modal } from "antd";
 
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 import {
   AreaChartOutlined,
   UserOutlined,
   SettingOutlined,
   ProductOutlined,
-  BgColorsOutlined, CommentOutlined,
+  BgColorsOutlined,
+  CommentOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa6";
@@ -22,7 +23,7 @@ import { TbBrand4Chan } from "react-icons/tb";
 import { TbBrandDenodo } from "react-icons/tb";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { LiaShoePrintsSolid } from "react-icons/lia";
-import {FaRegUser, FaShippingFast} from "react-icons/fa";
+import { FaRegUser, FaShippingFast } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { BiSolidDiscount } from "react-icons/bi";
 import { CiDiscount1 } from "react-icons/ci";
@@ -31,7 +32,7 @@ import { FaFileInvoice } from "react-icons/fa";
 const MenuList = ({ darkTheme }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState(null)
+  const [userRole, setUserRole] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
   const { confirm } = Modal;
 
@@ -47,15 +48,13 @@ const MenuList = ({ darkTheme }) => {
         localStorage.removeItem("user");
         setIsLoggedIn(false);
 
-        navigate("/auth/login-admin"); // Điều hướng về trang đăng nhập
+        navigate("/login-admin"); // Điều hướng về trang đăng nhập
       },
       onCancel() {
         console.log("Hủy đăng xuất");
       },
     });
   };
-
-
 
   useEffect(() => {
     const storedUserInfo = localStorage.getItem("user");
@@ -64,7 +63,6 @@ const MenuList = ({ darkTheme }) => {
       setUserInfo(parsedUserInfo);
     }
   }, []);
-
 
   const iconSize = 20;
 
@@ -78,14 +76,13 @@ const MenuList = ({ darkTheme }) => {
         }}
         className="menu-bar "
       >
-        {
-          ["ROLE_ADMIN", "ROLE_MANAGER"].includes(userInfo?.role) &&
+        {["ROLE_ADMIN", "ROLE_MANAGER"].includes(userInfo?.role) && (
           <Menu.Item key="home" icon={<MdDashboard size={iconSize} />}>
             <Link className={"text-decoration-none"} to={"dashboard"}>
               Tổng quan
             </Link>
           </Menu.Item>
-        }
+        )}
 
         <Menu.Item key="activity" icon={<MdLocalShipping size={iconSize} />}>
           <Link className={"text-decoration-none"} to={"sales-page"}>
@@ -155,19 +152,16 @@ const MenuList = ({ darkTheme }) => {
           icon={<UserOutlined size={iconSize} />}
           title="Quản lý tài khoản"
         >
-          {
-              ["ROLE_ADMIN", "ROLE_MANAGER"].includes(userInfo?.role) &&
-              <Menu.Item key="sub2-t1" icon={<FaRegUser size={iconSize} />}>
-                <Link to={"staff"}>Nhân Viên</Link>
-              </Menu.Item>
-          }
+          {["ROLE_ADMIN", "ROLE_MANAGER"].includes(userInfo?.role) && (
+            <Menu.Item key="sub2-t1" icon={<FaRegUser size={iconSize} />}>
+              <Link to={"staff"}>Nhân Viên</Link>
+            </Menu.Item>
+          )}
 
           <Menu.Item key="sub2-t2" icon={<FaUserCircle size={iconSize} />}>
             <Link to={"customer"}>Khách hàng</Link>
           </Menu.Item>
         </Menu.SubMenu>
-
-
 
         <Menu.Item key="comments" icon={<CommentOutlined size={iconSize} />}>
           <Link to={"comments"}>Quản lý bình luận</Link>
@@ -185,20 +179,20 @@ const MenuList = ({ darkTheme }) => {
             <Link to={"PromotionList"}>Đợt giảm giá</Link>
           </Menu.Item>
         </Menu.SubMenu>
-        {
-            ["ROLE_ADMIN", "ROLE_MANAGER"].includes(userInfo?.role) && (
-                <Menu.SubMenu
-                    key="setting"
-                    icon={<SettingOutlined size={iconSize} />}
-                    title="Cài đặt"
-                >
-                  <Menu.Item key="setting-feeship" icon={<FaShippingFast size={iconSize} />}>
-                    <Link to={"freeship-setting"}>Cài đặt phí ship</Link>
-                  </Menu.Item>
-
-                </Menu.SubMenu>
-            )
-        }
+        {["ROLE_ADMIN", "ROLE_MANAGER"].includes(userInfo?.role) && (
+          <Menu.SubMenu
+            key="setting"
+            icon={<SettingOutlined size={iconSize} />}
+            title="Cài đặt"
+          >
+            <Menu.Item
+              key="setting-feeship"
+              icon={<FaShippingFast size={iconSize} />}
+            >
+              <Link to={"freeship-setting"}>Cài đặt phí ship</Link>
+            </Menu.Item>
+          </Menu.SubMenu>
+        )}
 
         <Menu.Item
           key="exit"
