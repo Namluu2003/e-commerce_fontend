@@ -977,9 +977,12 @@ const SalesPage = () => {
 
   const [isPaymentModalVisible, setIsPaymentModalVisible] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
+  const creatingRef = useRef(false); // Khoá đồng bộ chống double-click
 
   const handleOnPayment = async () => {
-    if (isCreating) return; // Chống click 2 lần -> tạo 2 hóa đơn khi mạng chậm
+    if (creatingRef.current) return; // Đang tạo => chặn mọi click tiếp theo
+    creatingRef.current = true;
+    setIsCreating(true);
 
     const isConfirmed = await checkConfirmModal({
       title: "Xác nhận tạo hóa đơn",
@@ -994,9 +997,7 @@ const SalesPage = () => {
     if (!bill) {
       toast.error("Không tìm thấy hóa đơn hiện tại.");
       return;
-    } finally {
-            setIsCreating(false);
-        }
+    }
 
     if (bill.isShipping) {
       const { provinceId, districtId, wardId, specificAddress } =
@@ -1101,6 +1102,9 @@ const SalesPage = () => {
       }
     } catch (error) {
       toast.error("Có lỗi xảy ra khi tạo hóa đơn.");
+    } finally {
+      creatingRef.current = false;
+      setIsCreating(false);
     }
   };
 
