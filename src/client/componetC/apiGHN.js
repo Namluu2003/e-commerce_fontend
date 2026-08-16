@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const GHN_API_URL = "https://online-gateway.ghn.vn/shiip/public-api";
-const SERVICE_TYPE_ID = 2; 
+const SERVICE_TYPE_ID = 2;
 const TOKEN = import.meta.env.VITE_GHN_API_KEY;
 const SHOP_ID = 5638683;
 
@@ -16,7 +16,7 @@ export async function generateAddressString(
   provinceId,
   districtId,
   wardId,
-  specificAddress = ""
+  specificAddress = "",
 ) {
   let provinceName = "",
     districtName = "",
@@ -29,10 +29,10 @@ export async function generateAddressString(
         {},
         {
           headers: { Token: TOKEN },
-        }
+        },
       );
       const province = response.data.data.find(
-        (p) => p.ProvinceID === parseInt(provinceId)
+        (p) => p.ProvinceID === parseInt(provinceId),
       );
       provinceName = province?.ProvinceName || "";
     }
@@ -41,10 +41,10 @@ export async function generateAddressString(
       const response = await axios.post(
         `${GHN_API_URL}/master-data/district`,
         { province_id: parseInt(provinceId) },
-        { headers: { Token: TOKEN } }
+        { headers: { Token: TOKEN } },
       );
       const district = response.data.data.find(
-        (d) => d.DistrictID === parseInt(districtId)
+        (d) => d.DistrictID === parseInt(districtId),
       );
       districtName = district?.DistrictName || "";
     }
@@ -53,7 +53,7 @@ export async function generateAddressString(
       const response = await axios.post(
         `${GHN_API_URL}/master-data/ward`,
         { district_id: parseInt(districtId) },
-        { headers: { Token: TOKEN } }
+        { headers: { Token: TOKEN } },
       );
       const ward = response.data.data.find((w) => w.WardCode === wardId);
       wardName = ward?.WardName || "";
@@ -61,7 +61,7 @@ export async function generateAddressString(
   } catch (error) {
     console.error(
       "Lỗi khi lấy thông tin địa chỉ:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
   }
 
@@ -119,14 +119,14 @@ export const calculateShippingFee = async ({
           Token: tokenGHN,
           ShopId: shopId,
         },
-      }
+      },
     );
 
     return response.data.data.total;
   } catch (error) {
     console.error(
       "Error calculating shipping fee:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw new Error("Failed to calculate shipping fee");
   }
@@ -141,12 +141,12 @@ const formatDateTime = (timestamp) => {
   if (!timestamp) return "Không xác định";
   // Chuyển đổi timestamp từ giây sang mili giây
   const date = new Date(timestamp * 1000);
-  
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear();
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
 
   return `${day}/${month}/${year} ${hours}:${minutes}`;
 };
@@ -170,14 +170,32 @@ export const tinhThoiGianGiaoHang = async ({
 }) => {
   try {
     const tokenGHN = TOKEN;
+    // GHN chỉ chấp nhận service_id thật sự của shop (lấy từ available-services).
+    // Nếu serviceId truyền vào không hợp lệ -> tự lấy dịch vụ "Hàng nhẹ" (service_type_id = 2).
+    let ghnServiceId = parseInt(serviceId);
+    if (!ghnServiceId) {
+      const svResponse = await axios.post(
+        `${GHN_API_URL}/v2/shipping-order/available-services`,
+        {
+          shop_id: SHOP_ID,
+          from_district: parseInt(fromDistrictId) || 3440,
+          to_district: parseInt(toDistrictId) || 3440,
+        },
+        { headers: { Token: tokenGHN, ShopId: SHOP_ID } },
+      );
+      const services = svResponse.data?.data || [];
+      const hangNhe = services.find((s) => Number(s.service_type_id) === 2);
+      ghnServiceId = hangNhe?.service_id || services[0]?.service_id;
+    }
+
     const response = await axios.post(
       `${GHN_API_URL}/v2/shipping-order/leadtime`,
       {
-        from_district_id: 3440,
-        from_ward_code:'13008',
+        from_district_id: parseInt(fromDistrictId) || 3440,
+        from_ward_code: fromWardCode || "13008",
         to_district_id: parseInt(toDistrictId),
         to_ward_code: toWardCode,
-        service_id: parseInt(serviceId),
+        service_id: ghnServiceId,
       },
       {
         headers: {
@@ -185,17 +203,25 @@ export const tinhThoiGianGiaoHang = async ({
           Token: tokenGHN,
           ShopId: SHOP_ID,
         },
-      }
+      },
     );
 
+    const data = response.data?.data || {};
+    // GHN trả về `leadtime` (timestamp giây) và `leadtime_order` (khoảng thời gian dự kiến giao).
+    const estimateDate = data.leadtime_order?.to_estimate_date
+      ? new Date(data.leadtime_order.to_estimate_date)
+      : null;
+
     return {
-      thoiGianGiaoHang: formatDateTime(response.data.data.leadtime),
-      ngayTaoDon: formatDateTime(response.data.data.order_date),
+      thoiGianGiaoHang: formatDateTime(data.leadtime),
+      ngayTaoDon: estimateDate
+        ? estimateDate.toLocaleDateString("vi-VN")
+        : "Không xác định",
     };
   } catch (error) {
     console.error(
       "Lỗi khi tính thời gian giao hàng:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw new Error("Không thể tính thời gian giao hàng");
   }
