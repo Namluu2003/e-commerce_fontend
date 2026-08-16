@@ -48,7 +48,7 @@ const HomePage = () => {
       const response = await getAllProducthadSoldDesc(pageProductHadSolDescs);
       console.log(
         "Response tất cá sản phẩm có lươt bán từ nhiều tới ít:",
-        response
+        response,
       );
       setProductHadSolDescs(response.data);
     } catch (error) {
@@ -172,7 +172,7 @@ const HomePage = () => {
       {/* Featured Categories */}
       <div style={{ padding: "30px 24px" }}>
         <Row gutter={[24, 24]}>
-          <Col span={8}>
+          <Col xs={24} sm={8}>
             <Card
               hoverable
               cover={
@@ -225,7 +225,7 @@ const HomePage = () => {
               bodyStyle={{ display: "none" }}
             />
           </Col>
-          <Col span={8}>
+          <Col xs={24} sm={8}>
             <Card
               hoverable
               cover={
@@ -279,7 +279,7 @@ const HomePage = () => {
               bodyStyle={{ display: "none" }}
             />
           </Col>
-          <Col span={8}>
+          <Col xs={24} sm={8}>
             <Card
               hoverable
               cover={
@@ -338,7 +338,7 @@ const HomePage = () => {
       {/* Promo Banners */}
       <div style={{ padding: "0 24px 30px" }}>
         <Row gutter={[24, 24]}>
-          <Col span={8}>
+          <Col xs={24} md={8}>
             <Card bordered>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <img
@@ -355,7 +355,7 @@ const HomePage = () => {
               </div>
             </Card>
           </Col>
-          <Col span={8}>
+          <Col xs={24} md={8}>
             <Card bordered>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <img
@@ -372,7 +372,7 @@ const HomePage = () => {
               </div>
             </Card>
           </Col>
-          <Col span={8}>
+          <Col xs={24} md={8}>
             <Card bordered>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <img
@@ -384,7 +384,7 @@ const HomePage = () => {
                   <Title level={5} style={{ margin: "0 0 5px" }}>
                     Hỗ trợ 24/7
                   </Title>
-                  <Text type="secondary">Hotline: 0987 654 321</Text>
+                  <Text type="secondary">Hotline: 0335867600</Text>
                 </div>
               </div>
             </Card>
@@ -398,7 +398,7 @@ const HomePage = () => {
         className="p-2"
       >
         {brands.map((brand, index) => (
-          <Col key={index} span={4}>
+          <Col key={index} xs={8} sm={6} md={4}>
             <div style={{ textAlign: "center" }}>
               <img
                 src={brand.image}

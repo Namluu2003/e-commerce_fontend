@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'vietne263204@gmail.com', // Thay bằng email của bạn
+        user: 'tamdaonui198@gmail.com', // Thay bằng email của bạn
         pass: 'uzuntdlcmtwndtpv'   // Thay bằng password của bạn
     }
 });
@@ -23,7 +23,7 @@ app.post('/send-email', (req, res) => {
     const { to, subject, text } = req.body;
 
     const mailOptions = {
-        from: 'vietne263204@gmail.com',
+        from: 'tamdaonui198@gmail.com',
         to,
         subject,
         text

@@ -31,8 +31,7 @@ function Home() {
                 />
                
               </div>
-              <p className="text-muted mb-4">
-                Hộ Kinh Doanh Nghiêm Xuân Huy MST : 01E8027929<br />
+              <p className="text-muted mb-4">       
                 Nhà sưu tầm và phân phối chính hãng các thương hiệu thời trang
                 quốc tế hàng đầu Việt Nam
               </p>
@@ -55,19 +54,18 @@ function Home() {
                 <div className="icon-container me-3">
                   <IoCallSharp className="contact-icon" size={24} />
                 </div>
-                <p className="mb-0">0961302699</p>
+                <p className="mb-0">0335867600</p>
               </div>
               
               <div className="contact-item d-flex align-items-center mb-3">
                 <div className="icon-container me-3">
                   <IoMailOpenSharp className="contact-icon mail-icon" size={24} />
                 </div>
-                <p className="mb-0">duycongib192@gmail.com</p>
+                <p className="mb-0">tamdaonui198@gmail.com</p>
               </div>
               
-              <p className="text-muted small">
-                ĐKKD: 01E8027929 - Cấp ngày: 01/06/2019 - Nơi cấp: Hà Nội
-              </p>
+            
+            
             </div>
 
             {/* About Us column */}

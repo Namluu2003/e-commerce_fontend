@@ -114,6 +114,28 @@
   flex: none; /* override ant flex: 0 0 auto */
 }
 
+/* Responsive: 2 cột trên mobile, 3 cột trên tablet, 5 cột desktop */
+@media (max-width: 576px) {
+  .custom-col {
+    width: 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+  .custom-col {
+    width: 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .custom-col {
+    width: 33.333%;
+    max-width: 33.333%;
+  }
+}
+
 @media (min-width: 1200px) {
   .custom-col {
     width: 20%;

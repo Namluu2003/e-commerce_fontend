@@ -279,7 +279,7 @@ const GioiThieu = () => {
                 <ul className="list-disc pl-5 text-gray-600">
                   <li>Giới hạn tối đa 20 mặt hàng, tổng giá trị không quá 10 triệu đồng.</li>
                   <li>Tối đa 5 sản phẩm cho mỗi mặt hàng.</li>
-                  <li>Nếu khách hàng muốn mua số lượng lớn hơn, vui lòng liên hệ chúng tôi qua số điện thoại <b>0374269862</b> để nhận thêm nhiều ưu đãi.</li>
+                  <li>Nếu khách hàng muốn mua số lượng lớn hơn, vui lòng liên hệ chúng tôi qua số điện thoại <b>0335867600</b> để nhận thêm nhiều ưu đãi.</li>
                   <li>Thông báo thông tin đơn hàng về email khi đặt hàng thành công.</li>
                 </ul>
               </Panel>

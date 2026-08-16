@@ -322,7 +322,7 @@ function ProductsPage() {
               <Row gutter={[5, 5]} wrap>
                 {filteredData.products.length > 0 ? (
                   filteredData.products.map((product, index) => (
-                    <Col key={index} flex={"20%"} style={{ maxWidth: "20%" }}>
+                    <Col key={index} xs={12} sm={8} md={6} xl={5}>
                       <Link
                         to={`/products/product-detail/${product.productId}?colorId=${product.colorId}&sizeId=${product.sizeId}&genderId=${product.genderId}&materialId=${product.materialId}&soleId=${product.soleId}`}
                         style={{

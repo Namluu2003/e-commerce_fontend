@@ -119,10 +119,10 @@ function ContactForm() {
               <strong>ĐỊA CHỈ TRỤ SỞ:</strong> Cao đẳng FPT Polytechnich
             </div>
             <div className={styles.contactDetail}>
-              <strong>SỐ ĐIỆN THOẠI:</strong> 078 5499555
+              <strong>SỐ ĐIỆN THOẠI:</strong> 0335867600
             </div>
             <div className={styles.contactDetail}>
-              <strong>EMAIL:</strong> <a href="mailto:vietne263204@gmail.com">vietne263204@gmail.com</a>
+              <strong>EMAIL:</strong> <a href="mailto:tamdaonui198@gmail.com">tamdaonui198@gmail.com</a>
             </div>
             <div className={styles.mapContainer}>
               <iframe
@@ -138,9 +138,9 @@ function ContactForm() {
             </div>
             <div className={styles.additionalInfo}>
               <p>Cao đẳng FPT Polytechnich</p>
-              <p>Phone: (098) 491 8486 – Fax: (098) 491 8486</p>
-              <p>Tổng đài mua hàng: 0913576123</p>
-              <p>Tổng đài CSKH: 0984918486</p>
+              <p>Phone: 0335867600 – Fax: 0335867600</p>
+              <p>Tổng đài mua hàng: 0335867600</p>
+              <p>Tổng đài CSKH: 0335867600</p>
               <p>Thời gian làm việc tổng đài CSKH: 8:30 – 17h30 (Thứ 2 – Thứ 7)</p>
             </div>
           </div>
