@@ -69,7 +69,7 @@ const schema = yup.object().shape({
     .required("Vui lòng nhập email.")
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      "Email không hợp lệ"
+      "Email không hợp lệ",
     ),
   // city: yup.string().required("Vui lòng chọn tỉnh/thành phố."),
   // district: yup.string().required("Vui lòng chọn quận/huyện."),
@@ -86,7 +86,7 @@ const parsePrice = (price) => {
 const PayMent = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(() =>
-    JSON.parse(localStorage.getItem("user"))
+    JSON.parse(localStorage.getItem("user")),
   ); // Lấy user từ localStorage
   const [billDone, setBillDone] = useState(); // 1 mảng các sản phẩm
   const [loading, setLoading] = useState(false); // 1 mảng các sản phẩm
@@ -182,7 +182,7 @@ const PayMent = () => {
     } = selectedVoucher;
     if (caculamoneyBeforeDiscount < billMinValue) {
       toast.error(
-        "Giá trị đơn hàng chưa đạt mức tối thiểu để áp dụng voucher!"
+        "Giá trị đơn hàng chưa đạt mức tối thiểu để áp dụng voucher!",
       );
       return;
     }
@@ -197,7 +197,7 @@ const PayMent = () => {
 
     setDiscount(discountAmount);
     setAppliedDiscount(
-      `Mã ${voucherCode} - Giảm ${discountAmount.toLocaleString()} đ`
+      `Mã ${voucherCode} - Giảm ${discountAmount.toLocaleString()} đ`,
     );
     toast.success("Mã giảm giá đã được áp dụng!");
   };
@@ -286,7 +286,7 @@ const PayMent = () => {
         newAddress.provinceId,
         newAddress.districtId,
         newAddress.wardId,
-        newAddress.specificAddress ?? ""
+        newAddress.specificAddress ?? "",
       ).then((address) => {
         setFullAddress(address);
       });
@@ -312,7 +312,7 @@ const PayMent = () => {
     selectedProvince,
     selectedDistrict,
     selectedWard,
-    specificAddress
+    specificAddress,
   ) => {
     let totalFee = 0;
     if (selectedWard != null) {
@@ -343,7 +343,7 @@ const PayMent = () => {
       selectedProvince,
       selectedDistrict,
       selectedWard,
-      specificAddress ?? ""
+      specificAddress ?? "",
     ).then((address) => {
       setFullAddress(address);
     });
@@ -388,7 +388,7 @@ const PayMent = () => {
     let sum = productData.reduce(
       (sum, item) =>
         sum + parsePrice(item.price || 0) * (item.quantityAddCart || 1),
-      0
+      0,
     );
     sum = sum + parseFloat(bill?.shipMoney) - parseFloat(discount || 0);
     return sum;
@@ -400,7 +400,7 @@ const PayMent = () => {
     let sum = productData.reduce(
       (sum, item) =>
         sum + parsePrice(item.price || 0) * (item.quantityAddCart || 1),
-      0
+      0,
     );
     sum = sum - parseFloat(discount || 0);
     return sum;
@@ -412,7 +412,7 @@ const PayMent = () => {
     let sum = productData.reduce(
       (sum, item) =>
         sum + parsePrice(item.price || 0) * (item.quantityAddCart || 1),
-      0
+      0,
     );
     return sum;
   }, [productData, bill?.shipMoney]);
@@ -471,15 +471,6 @@ const PayMent = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFormSubmit = (data) => {
-    if (
-      !selectedAddress ||
-      !selectedAddress.provinceId ||
-      !selectedAddress.districtId ||
-      !selectedAddress.wardId
-    ) {
-      toast.error("Vui lòng chọn địa chỉ giao hàng trước khi đặt hàng!");
-      return;
-    }
     setbill((prev) => ({
       ...prev,
       recipientName: data.fullName,
@@ -536,7 +527,7 @@ const PayMent = () => {
             if (user) {
               toast.success("Đặt hàng thành công!");
               navigate(
-                `/success?status=1&&amount=${bill.moneyAfter}&&apptransid=ShipCod`
+                `/success?status=1&&amount=${bill.moneyAfter}&&apptransid=ShipCod`,
               );
             } else {
               navigate("/warn-veritify");
@@ -555,7 +546,7 @@ const PayMent = () => {
     console.log("đơn hàng đặt", bill);
 
     navigate(
-      `/success?status=1&&amount=${bill.moneyAfter}&&apptransid=ShipCod`
+      `/success?status=1&&amount=${bill.moneyAfter}&&apptransid=ShipCod`,
     );
 
     reset(); // Reset form sau khi gửi
