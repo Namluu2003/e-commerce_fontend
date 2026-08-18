@@ -437,7 +437,7 @@ const HomePage = () => {
                 color: `${COLORS.pending}`,
               }}
             >
-              SẢN PHẨM BÁN CHẠY
+              SẢN PHẨM 
             </div>
           }
           bordered={false}

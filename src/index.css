@@ -73,7 +73,7 @@ button:focus-visible {
   }
 }
 td.ant-table-cell {
-  padding: 8px 3px !important; /* Sử dụng !important để ưu tiên CSS */
+  padding: 8px 12px !important; /* Khoảng đệm chuẩn để bảng không bị vỡ */
 }
 
 
@@ -118,10 +118,7 @@ td.ant-table-cell {
   border-bottom-right-radius: 10px; /* Bo góc dưới phải */
 }
 
-.ant-table-cell{
-  padding-right: 0 !important;
-  padding-left: 0 !important;
-}
+
 
 
 /* .custom-table .ant-table-cell {
@@ -132,6 +129,318 @@ td.ant-table-cell {
   height: 50px;
   line-height: 50px;
 } */
+
+/* ============================================================
+   RESPONSIVE - MOBILE FIX (chỉ CSS/layout, giữ nguyên logic)
+   Áp dụng toàn cục cho KHÁCH HÀNG + ADMIN
+   ============================================================ */
+
+/* --- Chặn tràn ngang toàn trang --- */
+html,
+body,
+#root {
+  overflow-x: hidden;
+}
+
+/* --- Bảng antd: cuộn ngang khi nhiều cột, không bị bóp vỡ --- */
+.ant-table-content {
+  overflow-x: auto;
+}
+.ant-table-wrapper {
+  max-width: 100%;
+}
+
+/* --- Ảnh không tràn --- */
+img,
+.ant-image,
+.ant-image img {
+  max-width: 100%;
+}
+
+/* ---------------- Tablet & mobile (<= 1199px) ---------------- */
+@media (max-width: 1199px) {
+  /* Giỏ hàng: cột giỏ (16) và tổng (8) xếp chồng */
+  .ant-col-16,
+  .ant-col-8 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ---------------- Mobile (<= 768px) ---------------- */
+@media (max-width: 768px) {
+  /* Bảng nhiều cột: min-width để cuộn ngang thay vì bóp vỡ */
+  .ant-table-content table.ant-table {
+    min-width: 560px !important;
+  }
+  .ant-table-content {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Xếp chồng MỌI cột antd có span cố định (không ảnh hưởng lưới dùng xs/sm/md) */
+  .ant-col-1, .ant-col-2, .ant-col-3, .ant-col-4, .ant-col-5, .ant-col-6,
+  .ant-col-7, .ant-col-8, .ant-col-9, .ant-col-10, .ant-col-11, .ant-col-12,
+  .ant-col-13, .ant-col-14, .ant-col-15, .ant-col-16, .ant-col-17, .ant-col-18,
+  .ant-col-19, .ant-col-20, .ant-col-21, .ant-col-22, .ant-col-23 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Lưới sản phẩm 5 cột (flex='20%') -> 2 cột mobile */
+  .ant-col[style*="max-width: 20%"] {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+
+  /* Banner/carousel không quá cao */
+  .ant-carousel .slick-slide img {
+    height: 240px !important;
+    object-fit: cover;
+  }
+
+  /* Ảnh chính sản phẩm (500px) -> co theo màn hình */
+  .ant-image img[style*="width: 500px"],
+  .ant-image img[style*="height: 550px"] {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain;
+  }
+
+  /* Ô nhập bình luận min-width 400px -> 100% */
+  .ant-input[style*="min-width: 400px"],
+  textarea[style*="min-width: 400px"] {
+    min-width: 100% !important;
+  }
+
+  /* Chữ tiêu đề to không tràn */
+  h1 { font-size: 2em !important; }
+  h2 { font-size: 1.6em !important; }
+
+  /* ===== ADMIN ===== */
+  /* Sider admin (230px) -> overlay cố định, không ép content.
+     z-index thấp hơn header để nút thu gọn menu luôn bấm được. */
+  .ant-layout-sider[style*="width: 230px"] {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    z-index: 100 !important;
+    overflow-y: auto !important;
+  }
+  /* Header admin: luôn nằm trên Sider, cho phép quấn dòng, không tràn */
+  .ant-layout-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 130 !important;
+    flex-wrap: wrap !important;
+    height: auto !important;
+    line-height: normal !important;
+  }
+
+  /* ===== KHÁCH HÀNG: trang lọc sản phẩm =====
+     Sider bộ lọc (200px) -> xếp trên cùng, content bên dưới.
+     Chỉ áp cho layout chứa Sider 200px (không ảnh hưởng admin 230px). */
+  .ant-layout-has-sider:has(.ant-layout-sider[style*="width: 200px"]) {
+    flex-direction: column !important;
+  }
+  .ant-layout-sider[style*="width: 200px"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  /* Ép content trang lọc full width (tránh bị sập do flex column) */
+  .ant-layout-has-sider:has(.ant-layout-sider[style*="width: 200px"]) > .ant-layout-content {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  /* Bộ lọc trên mobile: xếp dọc, mỗi ô full width cho gọn */
+  .ant-layout-sider[style*="width: 200px"] .ant-row {
+    flex-direction: column !important;
+  }
+  .ant-layout-sider[style*="width: 200px"] .ant-row > .ant-col {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .ant-layout-sider[style*="width: 200px"] .ant-select,
+  .ant-layout-sider[style*="width: 200px"] .ant-input-number,
+  .ant-layout-sider[style*="width: 200px"] .ant-input-number-input {
+    width: 100% !important;
+  }
+  /* Mô tả 2 cột -> 1 cột */
+  .ant-descriptions table {
+    display: block;
+  }
+  .ant-descriptions-view {
+    overflow-x: auto;
+  }
+
+  /* Form admin dùng flex dọc không tràn */
+  .d-flex {
+    flex-wrap: wrap !important;
+  }
+}
+
+/* ---------------- Điện thoại rất nhỏ (<= 576px) ---------------- */
+@media (max-width: 576px) {
+  .ant-space,
+  .ant-space-item {
+    flex-wrap: wrap;
+  }
+  .ant-carousel .slick-slide img {
+    height: 180px !important;
+  }
+}
+
+/* ============================================================
+   ABOUT PAGE — bổ sung các tiện ích Tailwind bị thiếu
+   (About.jsx dùng class Tailwind nhưng Tailwind chưa được nạp).
+   Chỉ scoped trong trang About (main.bg-gradient-to-b).
+   ============================================================ */
+main.bg-gradient-to-b {
+  display: block;
+  background: linear-gradient(to bottom, #f9fafb, #ffffff);
+  color: #1f2937;
+  font-family: inherit;
+}
+main.bg-gradient-to-b .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+main.bg-gradient-to-b .flex { display: flex; }
+main.bg-gradient-to-b .flex-col { flex-direction: column; }
+main.bg-gradient-to-b .items-center { align-items: center; }
+main.bg-gradient-to-b .justify-center { justify-content: center; }
+main.bg-gradient-to-b .grid { display: grid; }
+main.bg-gradient-to-b .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+main.bg-gradient-to-b .gap-8 { gap: 2rem; }
+main.bg-gradient-to-b .w-full { width: 100%; }
+main.bg-gradient-to-b .h-auto { height: auto; }
+main.bg-gradient-to-b .w-12 { width: 3rem; }
+main.bg-gradient-to-b .h-12 { height: 3rem; }
+main.bg-gradient-to-b .mx-auto { margin-left: auto; margin-right: auto; }
+main.bg-gradient-to-b .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+main.bg-gradient-to-b .px-4 { padding-left: 1rem; padding-right: 1rem; }
+main.bg-gradient-to-b .px-8 { padding-left: 2rem; padding-right: 2rem; }
+main.bg-gradient-to-b .p-8 { padding: 2rem; }
+main.bg-gradient-to-b .mb-2 { margin-bottom: 0.5rem; }
+main.bg-gradient-to-b .mb-3 { margin-bottom: 0.75rem; }
+main.bg-gradient-to-b .mb-4 { margin-bottom: 1rem; }
+main.bg-gradient-to-b .mb-6 { margin-bottom: 1.5rem; }
+main.bg-gradient-to-b .mb-8 { margin-bottom: 2rem; }
+main.bg-gradient-to-b .mb-12 { margin-bottom: 3rem; }
+main.bg-gradient-to-b .mt-12 { margin-top: 3rem; }
+main.bg-gradient-to-b .pl-5 { padding-left: 1.25rem; }
+main.bg-gradient-to-b .text-center { text-align: center; }
+main.bg-gradient-to-b .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+main.bg-gradient-to-b .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+main.bg-gradient-to-b .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+main.bg-gradient-to-b .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+main.bg-gradient-to-b .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+main.bg-gradient-to-b .font-bold { font-weight: 700; }
+main.bg-gradient-to-b .font-semibold { font-weight: 600; }
+main.bg-gradient-to-b .leading-relaxed { line-height: 1.625; }
+main.bg-gradient-to-b .text-white { color: #ffffff; }
+main.bg-gradient-to-b .text-indigo-600 { color: #4f46e5; }
+main.bg-gradient-to-b .text-indigo-100 { color: #e0e7ff; }
+main.bg-gradient-to-b .text-gray-800 { color: #1f2937; }
+main.bg-gradient-to-b .text-gray-600 { color: #4b5563; }
+main.bg-gradient-to-b .bg-white { background-color: #ffffff; }
+main.bg-gradient-to-b .bg-gray-50 { background-color: #f9fafb; }
+main.bg-gradient-to-b .bg-gradient-to-r { background-image: linear-gradient(to right, #4f46e5, #9333ea); }
+main.bg-gradient-to-b .rounded-xl { border-radius: 0.75rem; }
+main.bg-gradient-to-b .rounded-lg { border-radius: 0.5rem; }
+main.bg-gradient-to-b .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); }
+main.bg-gradient-to-b .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); }
+main.bg-gradient-to-b .border { border: 1px solid #e5e7eb; }
+main.bg-gradient-to-b .list-disc { list-style-type: disc; }
+main.bg-gradient-to-b h1,
+main.bg-gradient-to-b h2,
+main.bg-gradient-to-b h3 { line-height: 1.25; }
+main.bg-gradient-to-b .ant-collapse { overflow: hidden; }
+@media (min-width: 768px) {
+  main.bg-gradient-to-b .md\:flex-row { flex-direction: row; }
+  main.bg-gradient-to-b .md\:w-1\/2 { width: 50%; }
+  main.bg-gradient-to-b .md\:mb-0 { margin-bottom: 0; }
+  main.bg-gradient-to-b .md\:text-5xl { font-size: 3rem; line-height: 1; }
+  main.bg-gradient-to-b .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  main.bg-gradient-to-b .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  main.bg-gradient-to-b .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* ============================================================
+   CHI TIẾT SẢN PHẨM (mobile) — sắp lại bố cục cho đẹp
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Thanh nút "Thêm giỏ / Mua ngay":
+     bỏ trôi nổi absolute -> đặt trong luồng, nút full width, bọc dòng */
+  .ant-col[style*="bottom: 0rem"][style*="width: 100%"] {
+    position: static !important;
+    margin-top: 1rem;
+    padding: 0 8px !important;
+  }
+  .ant-col[style*="bottom: 0rem"][style*="width: 100%"] .ant-space {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  .ant-col[style*="bottom: 0rem"][style*="width: 100%"] .ant-space .ant-space-item {
+    width: 100% !important;
+  }
+  .ant-col[style*="bottom: 0rem"][style*="width: 100%"] .ant-space .ant-btn {
+    width: 100% !important;
+    height: 46px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Cột thông tin: căn chỉnh, không sát mép */
+  .ant-col-13 {
+    padding: 0 4px;
+  }
+
+  /* Giá: co lại, không tràn */
+  .ant-col-13 h2 {
+    font-size: 1.25rem !important;
+    word-break: break-word;
+    line-height: 1.3;
+  }
+
+  /* Hàng thuộc tính: nhãn + giá trị đẹp hơn */
+  .ant-col-13 .ant-row .ant-col-6 {
+    font-weight: 600;
+  }
+  .ant-col-13 .ant-col-18 {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Ô chọn (Radio) bọc dòng gọn */
+  .ant-col-13 .ant-radio-group,
+  .ant-col-13 .ant-space {
+    flex-wrap: wrap !important;
+  }
+}
+
+/* Hàng ảnh thu nhỏ sản phẩm: cho phép bọc dòng + co nhẹ trên điện thoại nhỏ */
+@media (max-width: 576px) {
+  div[style*="display: flex"][style*="gap: 10px"] {
+    flex-wrap: wrap !important;
+  }
+  .ant-image img[style*="width: 80px"] {
+    width: 64px !important;
+    height: 72px !important;
+  }
+}
 
 
 
